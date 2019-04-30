@@ -78,7 +78,7 @@
     <div class="box-header">
         <div class="row">
             <div class="col-md-3">
-                <a href="{{ url()->previous() }}" class="btn btn-sm btn-default"><i class="fa fa-arrow-left"></i> Voltar</a>
+                <a href="{{ route('visitor.index') }}" class="btn btn-sm btn-default"><i class="fa fa-arrow-left"></i> Voltar</a>
                 <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-plus"></i> Visita</button>
             </div>
             <div class="col-md-5 pull-right">

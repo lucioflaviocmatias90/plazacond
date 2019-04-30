@@ -116,6 +116,11 @@
                     getBrandName('caminhoes');
                     break;
 
+                case '1':
+                    $("#model>option").remove();
+                    $("#brand>option").remove();
+                    break;
+
                 default:
                     console.log('Selecione o tipo');
                     break;
@@ -123,7 +128,7 @@
 
         });
 
-        myBrand.addEventListener('change', function(ev){
+        myBrand.addEventListener('change', function(ev){            
 
             getModelName(myBrand[myBrand.selectedIndex].id);
 
@@ -132,6 +137,10 @@
         function getBrandName(veiculo) {
             
             $.get('http://fipeapi.appspot.com/api/1/' + veiculo + '/marcas.json', function(resp) {
+
+                $("#model>option").remove();
+
+                $("#brand>option").remove();
 
                 $("#brand").append("<option>Selecione a marca</option>");
 
@@ -146,6 +155,8 @@
         function getModelName(marca) {
             
             $.get('http://fipeapi.appspot.com/api/1/carros/veiculos/' + marca + '.json', function(resp) {
+
+                $("#model>option").remove();
 
                 $("#model").append("<option>Selecione o modelo</option>");
 

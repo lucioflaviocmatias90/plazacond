@@ -28,7 +28,7 @@
                 <div class="form-group">
                     <label for="photo_path">Selecione uma foto</label>
                     <span class="text-muted" style="margin-left: 10px">(Opcional)</span>
-                    <input type="file" id="photo_path" name="photo_path">
+                    <input type="file" id="photo_path" name="photo_path" class="form-control">
                 </div>
             </div>
             <div class="col-md-9">

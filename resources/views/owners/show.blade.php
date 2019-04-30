@@ -238,7 +238,7 @@
                                         <!-- Add the bg color to the header using any of the bg-* classes -->
                                         <div class="widget-user-header bg-purple">
                                             <div class="widget-user-image">
-                                                <img class="img-circle" src="/img/profile.png" alt="User Avatar">
+                                                <img class="img-circle" src="{{ $resident->photo_path == '' ? '/img/profile.png' : '/storage/'.$resident->photo_path }}" alt="User Avatar">
                                             </div>                                 
                                             <!-- /.widget-user-image -->
                                             <h4 class="widget-user-username">{{ $resident->fullname }}</h4>

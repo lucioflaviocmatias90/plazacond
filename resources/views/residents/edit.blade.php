@@ -21,12 +21,12 @@
             <div class="col-md-3">
                 <img class="profile-user-img img-responsive img-circle" src="{{ $resident->photo_path == '' ? '/img/profile.png' : '/storage/'.$resident->photo_path }}" alt="User profile picture">
 
-                <p class="text-muted text-center">Proprietário - {{ $resident->owner->blap }}</p>
+                <p class="text-muted text-center">Residente - {{ $resident->owner->blap }}</p>
 
                 <div class="form-group">
                     <label for="photo_path">Selecione uma foto</label>
                     <span class="text-muted" style="margin-left: 10px">(Opcional)</span>
-                    <input type="file" id="photo_path" name="photo_path">
+                    <input type="file" id="photo_path" name="photo_path" class="form-control">
                 </div>
             </div>
             <div class="col-md-9">                
@@ -127,7 +127,7 @@
     //Date picker
     $(function() {
         $("#birthday").datepicker({
-            dateFormat: 'dd/mm/yy',
+            dateFormat: 'yy-mm-dd',
             dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
             dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
             dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],

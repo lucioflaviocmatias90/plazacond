@@ -73,21 +73,14 @@ class OwnerController extends Controller
     public function update(Request $request, $id)
     {
         $owner = Owner::findOrFail($id);
-
-        $owner->fullname = $request->input('fullname');
-        $owner->condition = $request->input('condition');
-        $owner->birthday = $request->input('birthday');
-        $owner->email = $request->input('email');
-        $owner->rg = $request->input('rg');
-        $owner->cpf = $request->input('cpf');
-        $owner->gender = $request->input('gender');
-        $owner->phone = $request->input('phone');
-        $owner->observation = $request->input('observation');
-
-        $owner->save();
-
-        return redirect()->route('owner.show', ['owner'=>$owner->id]);
-    }
+        $owner->update($request->except('photo_path'));
+        if ($request->hasFile('photo_path')) {
+            if ($owner->photo_path != '') Storage::disk('public')->delete($owner->photo_path);
+            $path = $request->file('photo_path')->store('owners', 'public');
+            $owner->update(['photo_path'=>$path]);
+        }
+        return redirect()->route('owner.show', ['owner'=>$owner->id])->with('success', 'Atualizado com sucesso!');
+    }        
 
     /**
      * Remove the specified resource from storage.

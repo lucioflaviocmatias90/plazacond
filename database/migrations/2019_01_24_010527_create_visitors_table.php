@@ -22,6 +22,7 @@ class CreateVisitorsTable extends Migration
             $table->string('photo_path')->nullable();
             $table->enum('gender', ['masculino', 'feminino']);            
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

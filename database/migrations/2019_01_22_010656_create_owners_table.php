@@ -25,8 +25,10 @@ class CreateOwnersTable extends Migration
             $table->enum('gender', ['masculino', 'feminino']);
             $table->string('phone');
             $table->string('photo_path')->nullable();
-            $table->text('observation')->nullable();
+            $table->text('observation')->nullable();            
+            $table->integer('apartment_id')->unsigned();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

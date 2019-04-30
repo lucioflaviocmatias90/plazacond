@@ -20,8 +20,9 @@ class CreateClassifiedsTable extends Migration
             $table->text('description');
             $table->string('photo_path')->nullable();            
             $table->integer('owner_id')->unsigned()->nullable();
-            $table->foreign('owner_id')->references('id')->on('owners');
+            $table->foreign('owner_id')->references('id')->on('owners')->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

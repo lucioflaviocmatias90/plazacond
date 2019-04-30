@@ -3,9 +3,16 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Owner extends Model
 {
+    use SoftDeletes;
+
+    protected $fillable = ['blap', 'fullname', 'condition', 'birthday', 'email', 'rg', 'cpf', 'gender', 'phone', 'photo_path', 'observation'];
+
+    protected $dates = ['deleted_at'];
+    
     public function resident()
     {
     	return $this->hasMany('App\Resident');

@@ -24,8 +24,9 @@ class CreateResidentsTable extends Migration
             $table->string('phone')->nullable();
             $table->string('resident_type');
             $table->integer('owner_id')->unsigned()->nullable();
-            $table->foreign('owner_id')->references('id')->on('owners');
+            $table->foreign('owner_id')->references('id')->on('owners')->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -37,9 +37,7 @@ class VehicleController extends Controller
     public function store(VehicleRequest $request)
     {
         $validated = $request->validated();
-
         Vehicle::create($request->all());
-
         return redirect()->route('vehicle.index');
     }
 

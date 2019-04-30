@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Resident;
 use App\Owner;
 use App\Enums\ResidentType;
+use Illuminate\Support\Facades\Storage;
 
 class ResidentController extends Controller
 {
@@ -51,19 +52,11 @@ class ResidentController extends Controller
      */
     public function store(Request $request)
     {
-        $resident = new Resident();
-
-        $resident->fullname = $request->input('fullname');
-        $resident->rg = $request->input('rg');
-        $resident->cpf = $request->input('cpf');
-        $resident->gender = $request->input('gender');
-        $resident->birthday = $request->input('birthday');
-        $resident->phone = $request->input('phone');
-        $resident->resident_type = $request->input('resident_type');
-        $resident->owner_id = $request->input('owner_id');
-
-        $resident->save();
-
+        $resident = Resident::create($request->except('photo_path'));
+        if ($request->hasFile('photo_path')) {
+            $path = $request->file('photo_path')->store('residents', 'public');
+            Resident::findOrFail($resident->id)->update(['photo_path'=>$path]);
+        }
         return redirect()->route('resident.index')->with('success', 'Morador cadastrado com sucesso!');
     }
 
@@ -88,18 +81,12 @@ class ResidentController extends Controller
     public function update(Request $request, $id)
     {
         $resident = Resident::findOrFail($id);
-
-        $resident->fullname = $request->input('fullname');
-        $resident->rg = $request->input('rg');
-        $resident->cpf = $request->input('cpf');
-        $resident->gender = $request->input('gender');
-        $resident->birthday = $request->input('birthday');
-        $resident->phone = $request->input('phone');
-        $resident->resident_type = $request->input('resident_type');
-        $resident->owner_id = $request->input('owner_id');
-
-        $resident->save();
-
+        $resident->update($request->except('photo_path'));
+        if ($request->hasFile('photo_path')) {
+            if ($resident->photo_path != '') Storage::disk('public')->delete($resident->photo_path);
+            $path = $request->file('photo_path')->store('residents', 'public');
+            $resident->update(['photo_path'=>$path]);
+        }
         return redirect()->route('resident.index')->with('success', 'Morador cadastrado com sucesso!');
     }
 

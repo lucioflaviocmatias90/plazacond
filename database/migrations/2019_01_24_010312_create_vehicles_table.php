@@ -22,8 +22,9 @@ class CreateVehiclesTable extends Migration
             $table->string('vehicle_plate');
             $table->text('observation')->nullable();
             $table->integer('owner_id')->unsigned()->nullable();
-            $table->foreign('owner_id')->references('id')->on('owners');
+            $table->foreign('owner_id')->references('id')->on('owners')->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
