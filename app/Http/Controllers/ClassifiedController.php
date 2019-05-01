@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Classified;
-use App\Owner;
+use App\Apartment;
 
 class ClassifiedController extends Controller
 {
@@ -26,7 +26,7 @@ class ClassifiedController extends Controller
      */
     public function create()
     {
-        $owners = Owner::all(['id', 'blap']);
+        $owners = Apartment::all(['id', 'blap']);
         return view('classifieds.create', compact('owners'));
     }
 
@@ -38,14 +38,7 @@ class ClassifiedController extends Controller
      */
     public function store(Request $request)
     {
-        $classified = new Classified();
-        $classified->title = $request->input('title');
-        $classified->price = $request->input('price');
-        $classified->description = $request->input('description');
-        $classified->owner_id = $request->input('owner_id');
-
-        $classified->save();
-
+        Classified::create($request->all());
         return redirect()->route('classified.index');
     }
 
@@ -53,7 +46,6 @@ class ClassifiedController extends Controller
     {
         $classifieds = Classified::where('fullname','like','%'.$request->search.'%')->paginate(10);
         return view('classifieds.index', compact('classifieds'));
-        // return Owner::search($request->search)->paginate(10);
     }
 
     /**

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Vehicle;
-use App\Owner;
+use App\Apartment;
 use App\Http\Requests\VehicleRequest;
 
 class VehicleController extends Controller
@@ -30,7 +30,7 @@ class VehicleController extends Controller
 
     public function create()
     {
-        $owners = Owner::all(['id', 'blap']);
+        $owners = Apartment::all(['id', 'blap']);
         return view('vehicles.create', compact('owners'));
     }
     
@@ -44,7 +44,6 @@ class VehicleController extends Controller
     public function search(Request $request)
     {
         $vehicles = Vehicle::with('owner')->where('model','like','%'.$request->search.'%')->orWhere('vehicle_plate','like','%'.$request->search.'%')->paginate(10);
-
         return view('vehicles.index', compact('vehicles'));
     }
 
@@ -57,7 +56,6 @@ class VehicleController extends Controller
     public function edit($id)
     {
         $vehicle = Vehicle::findOrFail($id);
-
         return view('vehicles.edit', compact('vehicle'));
     }
 

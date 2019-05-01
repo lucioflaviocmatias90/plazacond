@@ -16,7 +16,7 @@ class CreateApartmentsTable extends Migration
         Schema::create('apartments', function (Blueprint $table) {
             $table->increments('id');
             $table->string('blap');
-            $table->string('condition');
+            $table->enum('condition', ['alugado', 'residindo', 'aluga-se', 'vende-se', 'vazio']);
             $table->timestamps();
         });
     }

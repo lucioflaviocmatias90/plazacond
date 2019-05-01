@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Resident;
-use App\Owner;
+use App\Apartment;
 use App\Enums\ResidentType;
 use Illuminate\Support\Facades\Storage;
 
@@ -24,14 +24,14 @@ class ResidentController extends Controller
 
     public function create()
     {
-        $owners = Owner::all(['id', 'blap']);
+        $owners = Apartment::all(['id', 'blap']);
         $residenType = ResidentType::toSelectArray();
         return view('residents.create', compact(['residenType', 'owners']));
     }
 
     public function edit($id)
     {   
-        $owners = Owner::all(['id', 'blap']);
+        $owners = Apartment::all(['id', 'blap']);
         $residenType = ResidentType::toSelectArray();
         $resident = Resident::with('owner')->findOrFail($id);
         return view('residents.edit', compact(['resident', 'residenType', 'owners']));

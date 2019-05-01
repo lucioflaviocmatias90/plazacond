@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Letter;
-use App\Owner;
+use App\Apartment;
 
 class LetterController extends Controller
 {
@@ -17,7 +17,7 @@ class LetterController extends Controller
 
     public function getOwners()
     {
-        return Owner::all(['id', 'blap']);
+        return Apartment::all(['id', 'blap']);
     }
 
     public function index()

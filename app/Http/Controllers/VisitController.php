@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Owner;
+use App\Apartment;
 use App\Visit;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -21,7 +21,7 @@ class VisitController extends Controller
 
     public function edit($id)
     {
-        $owners = Owner::all(['id', 'blap']);
+        $owners = Apartment::all(['id', 'blap']);
         $visit = Visit::findOrFail($id);
         return view('visits.edit', ['owners'=>$owners, 'visit'=>$visit]);
     }

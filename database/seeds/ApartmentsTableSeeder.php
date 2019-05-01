@@ -1,0 +1,178 @@
+<?php
+
+use Illuminate\Database\Seeder;
+
+class ApartmentsTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        DB::table('apartments')->insert([
+            // BLOCO A
+        	['blap' => 'A/01', 'condition' => 'vazio'],
+        	['blap' => 'A/02', 'condition' => 'vazio'],
+        	['blap' => 'A/03', 'condition' => 'vazio'],
+        	['blap' => 'A/04', 'condition' => 'vazio'],
+            ['blap' => 'A/11', 'condition' => 'vazio'],
+            ['blap' => 'A/12', 'condition' => 'vazio'],
+            ['blap' => 'A/13', 'condition' => 'vazio'],
+            ['blap' => 'A/14', 'condition' => 'vazio'],
+            ['blap' => 'A/21', 'condition' => 'vazio'],
+            ['blap' => 'A/22', 'condition' => 'vazio'],
+            ['blap' => 'A/23', 'condition' => 'vazio'],
+            ['blap' => 'A/24', 'condition' => 'vazio'],
+            ['blap' => 'A/31', 'condition' => 'vazio'],
+            ['blap' => 'A/32', 'condition' => 'vazio'],
+            ['blap' => 'A/33', 'condition' => 'vazio'],
+            ['blap' => 'A/34', 'condition' => 'vazio'],
+
+            // BLOCO B
+            ['blap' => 'B/01', 'condition' => 'vazio'],
+            ['blap' => 'B/02', 'condition' => 'vazio'],
+            ['blap' => 'B/03', 'condition' => 'vazio'],
+            ['blap' => 'B/04', 'condition' => 'vazio'],
+            ['blap' => 'B/11', 'condition' => 'vazio'],
+            ['blap' => 'B/12', 'condition' => 'vazio'],
+            ['blap' => 'B/13', 'condition' => 'vazio'],
+            ['blap' => 'B/14', 'condition' => 'vazio'],
+            ['blap' => 'B/21', 'condition' => 'vazio'],
+            ['blap' => 'B/22', 'condition' => 'vazio'],
+            ['blap' => 'B/23', 'condition' => 'vazio'],
+            ['blap' => 'B/24', 'condition' => 'vazio'],
+            ['blap' => 'B/31', 'condition' => 'vazio'],
+            ['blap' => 'B/32', 'condition' => 'vazio'],
+            ['blap' => 'B/33', 'condition' => 'vazio'],
+            ['blap' => 'B/34', 'condition' => 'vazio'],
+
+            // BLOCO C
+            ['blap' => 'C/01', 'condition' => 'vazio'],
+            ['blap' => 'C/02', 'condition' => 'vazio'],
+            ['blap' => 'C/03', 'condition' => 'vazio'],
+            ['blap' => 'C/04', 'condition' => 'vazio'],
+            ['blap' => 'C/11', 'condition' => 'vazio'],
+            ['blap' => 'C/12', 'condition' => 'vazio'],
+            ['blap' => 'C/13', 'condition' => 'vazio'],
+            ['blap' => 'C/14', 'condition' => 'vazio'],
+            ['blap' => 'C/21', 'condition' => 'vazio'],
+            ['blap' => 'C/22', 'condition' => 'vazio'],
+            ['blap' => 'C/23', 'condition' => 'vazio'],
+            ['blap' => 'C/24', 'condition' => 'vazio'],
+            ['blap' => 'C/31', 'condition' => 'vazio'],
+            ['blap' => 'C/32', 'condition' => 'vazio'],
+            ['blap' => 'C/33', 'condition' => 'vazio'],
+            ['blap' => 'C/34', 'condition' => 'vazio'],
+
+            // BLOCO D
+            ['blap' => 'D/01', 'condition' => 'vazio'],
+            ['blap' => 'D/02', 'condition' => 'vazio'],
+            ['blap' => 'D/03', 'condition' => 'vazio'],
+            ['blap' => 'D/04', 'condition' => 'vazio'],
+            ['blap' => 'D/11', 'condition' => 'vazio'],
+            ['blap' => 'D/12', 'condition' => 'vazio'],
+            ['blap' => 'D/13', 'condition' => 'vazio'],
+            ['blap' => 'D/14', 'condition' => 'vazio'],
+            ['blap' => 'D/21', 'condition' => 'vazio'],
+            ['blap' => 'D/22', 'condition' => 'vazio'],
+            ['blap' => 'D/23', 'condition' => 'vazio'],
+            ['blap' => 'D/24', 'condition' => 'vazio'],
+            ['blap' => 'D/31', 'condition' => 'vazio'],
+            ['blap' => 'D/32', 'condition' => 'vazio'],
+            ['blap' => 'D/33', 'condition' => 'vazio'],
+            ['blap' => 'D/34', 'condition' => 'vazio'],
+
+            // BLOCO E
+            ['blap' => 'E/01', 'condition' => 'vazio'],
+            ['blap' => 'E/02', 'condition' => 'vazio'],
+            ['blap' => 'E/03', 'condition' => 'vazio'],
+            ['blap' => 'E/04', 'condition' => 'vazio'],
+            ['blap' => 'E/11', 'condition' => 'vazio'],
+            ['blap' => 'E/12', 'condition' => 'vazio'],
+            ['blap' => 'E/13', 'condition' => 'vazio'],
+            ['blap' => 'E/14', 'condition' => 'vazio'],
+            ['blap' => 'E/21', 'condition' => 'vazio'],
+            ['blap' => 'E/22', 'condition' => 'vazio'],
+            ['blap' => 'E/23', 'condition' => 'vazio'],
+            ['blap' => 'E/24', 'condition' => 'vazio'],
+            ['blap' => 'E/31', 'condition' => 'vazio'],
+            ['blap' => 'E/32', 'condition' => 'vazio'],
+            ['blap' => 'E/33', 'condition' => 'vazio'],
+            ['blap' => 'E/34', 'condition' => 'vazio'],
+
+            // BLOCO F
+            ['blap' => 'F/01', 'condition' => 'vazio'],
+            ['blap' => 'F/02', 'condition' => 'vazio'],
+            ['blap' => 'F/03', 'condition' => 'vazio'],
+            ['blap' => 'F/04', 'condition' => 'vazio'],
+            ['blap' => 'F/11', 'condition' => 'vazio'],
+            ['blap' => 'F/12', 'condition' => 'vazio'],
+            ['blap' => 'F/13', 'condition' => 'vazio'],
+            ['blap' => 'F/14', 'condition' => 'vazio'],
+            ['blap' => 'F/21', 'condition' => 'vazio'],
+            ['blap' => 'F/22', 'condition' => 'vazio'],
+            ['blap' => 'F/23', 'condition' => 'vazio'],
+            ['blap' => 'F/24', 'condition' => 'vazio'],
+            ['blap' => 'F/31', 'condition' => 'vazio'],
+            ['blap' => 'F/32', 'condition' => 'vazio'],
+            ['blap' => 'F/33', 'condition' => 'vazio'],
+            ['blap' => 'F/34', 'condition' => 'vazio'],
+
+            // BLOCO G
+            ['blap' => 'G/01', 'condition' => 'vazio'],
+            ['blap' => 'G/02', 'condition' => 'vazio'],
+            ['blap' => 'G/03', 'condition' => 'vazio'],
+            ['blap' => 'G/04', 'condition' => 'vazio'],
+            ['blap' => 'G/11', 'condition' => 'vazio'],
+            ['blap' => 'G/12', 'condition' => 'vazio'],
+            ['blap' => 'G/13', 'condition' => 'vazio'],
+            ['blap' => 'G/14', 'condition' => 'vazio'],
+            ['blap' => 'G/21', 'condition' => 'vazio'],
+            ['blap' => 'G/22', 'condition' => 'vazio'],
+            ['blap' => 'G/23', 'condition' => 'vazio'],
+            ['blap' => 'G/24', 'condition' => 'vazio'],
+            ['blap' => 'G/31', 'condition' => 'vazio'],
+            ['blap' => 'G/32', 'condition' => 'vazio'],
+            ['blap' => 'G/33', 'condition' => 'vazio'],
+            ['blap' => 'G/34', 'condition' => 'vazio'],
+
+            // BLOCO H
+            ['blap' => 'H/01', 'condition' => 'vazio'],
+            ['blap' => 'H/02', 'condition' => 'vazio'],
+            ['blap' => 'H/03', 'condition' => 'vazio'],
+            ['blap' => 'H/04', 'condition' => 'vazio'],
+            ['blap' => 'H/11', 'condition' => 'vazio'],
+            ['blap' => 'H/12', 'condition' => 'vazio'],
+            ['blap' => 'H/13', 'condition' => 'vazio'],
+            ['blap' => 'H/14', 'condition' => 'vazio'],
+            ['blap' => 'H/21', 'condition' => 'vazio'],
+            ['blap' => 'H/22', 'condition' => 'vazio'],
+            ['blap' => 'H/23', 'condition' => 'vazio'],
+            ['blap' => 'H/24', 'condition' => 'vazio'],
+            ['blap' => 'H/31', 'condition' => 'vazio'],
+            ['blap' => 'H/32', 'condition' => 'vazio'],
+            ['blap' => 'H/33', 'condition' => 'vazio'],
+            ['blap' => 'H/34', 'condition' => 'vazio'],
+
+            // BLOCO I
+            ['blap' => 'I/01', 'condition' => 'vazio'],
+            ['blap' => 'I/02', 'condition' => 'vazio'],
+            ['blap' => 'I/03', 'condition' => 'vazio'],
+            ['blap' => 'I/04', 'condition' => 'vazio'],
+            ['blap' => 'I/11', 'condition' => 'vazio'],
+            ['blap' => 'I/12', 'condition' => 'vazio'],
+            ['blap' => 'I/13', 'condition' => 'vazio'],
+            ['blap' => 'I/14', 'condition' => 'vazio'],
+            ['blap' => 'I/21', 'condition' => 'vazio'],
+            ['blap' => 'I/22', 'condition' => 'vazio'],
+            ['blap' => 'I/23', 'condition' => 'vazio'],
+            ['blap' => 'I/24', 'condition' => 'vazio'],
+            ['blap' => 'I/31', 'condition' => 'vazio'],
+            ['blap' => 'I/32', 'condition' => 'vazio'],
+            ['blap' => 'I/33', 'condition' => 'vazio'],
+            ['blap' => 'I/34', 'condition' => 'vazio'],
+        ]);
+    }
+}

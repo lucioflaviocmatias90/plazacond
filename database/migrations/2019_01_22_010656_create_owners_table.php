@@ -15,9 +15,7 @@ class CreateOwnersTable extends Migration
     {
         Schema::create('owners', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('blap');
-            $table->string('fullname');                       
-            $table->enum('condition', ['alugado', 'residindo', 'aluga-se', 'vende-se', 'vazio']);
+            $table->string('fullname');  
             $table->date('birthday')->nullable(); 
             $table->string('email')->nullable();
             $table->string('rg')->nullable();
@@ -26,7 +24,8 @@ class CreateOwnersTable extends Migration
             $table->string('phone');
             $table->string('photo_path')->nullable();
             $table->text('observation')->nullable();            
-            $table->integer('apartment_id')->unsigned();
+            $table->integer('apartment_id')->unsigned()->nullable();
+            $table->foreign('apartment_id')->references('id')->on('apartments')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });

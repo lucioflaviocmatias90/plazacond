@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Kiosk;
-use App\Owner;
+use App\Apartment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,7 +16,7 @@ class KioskController extends Controller
      */
     public function getOwners()
     {
-        return Owner::all(['id', 'blap']);
+        return Apartment::all(['id', 'blap']);
     }
 
     public function index()

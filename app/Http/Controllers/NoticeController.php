@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Owner;
+use App\Apartment;
 use App\Notice;
 
 class NoticeController extends Controller
@@ -21,7 +21,7 @@ class NoticeController extends Controller
 
     public function create()
     {
-        $owners = Owner::all(['id', 'blap']);
+        $owners = Apartment::all(['id', 'blap']);
         return view('notices.create',compact('owners'));
     }
 

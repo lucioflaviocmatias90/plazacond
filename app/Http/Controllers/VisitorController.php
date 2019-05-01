@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Visitor;
-use App\Owner;
+use App\Apartment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -71,7 +71,7 @@ class VisitorController extends Controller
      */
     public function show($id)
     {
-        $owners = Owner::all(['id', 'blap']);
+        $owners = Apartment::all(['id', 'blap']);
         $visitor = Visitor::findOrFail($id);
         $visits = Visitor::with('owner')->findOrFail($id);
         return view('visitors.show', compact(['visitor', 'visits', 'owners']));
@@ -93,16 +93,7 @@ class VisitorController extends Controller
     public function update(Request $request, $id)
     {
         $visitor = Visitor::findOrFail($id);
-
-        $visitor->fullname = $request->input('fullname');
-        $visitor->rg = $request->input('rg');
-        $visitor->cpf = $request->input('cpf');
-        $visitor->gender = $request->input('gender');
-        // $visitor->birthday = $request->input('birthday');
-        $visitor->phone = $request->input('phone');
-
-        $visitor->save();
-
+        $visitor->update($request->except('photo_path'));
         return redirect()->route('visitor.index');
     }
 
