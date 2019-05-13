@@ -23,7 +23,7 @@
         <div class="box-body">
             <div class="col-md-3">
                 <img class="profile-user-img img-responsive img-circle" src="{{ $owner->photo_path == '' ? '/img/profile.png' : '/storage/'.$owner->photo_path }}" alt="User profile picture">
-                <p class="text-muted text-center">Proprietário - {{ $owner->blap }}</p>
+                <p class="text-muted text-center">Proprietário - {{ $owner->apartment->blap }}</p>
 
                 <div class="form-group">
                     <label for="photo_path">Selecione uma foto</label>
@@ -36,17 +36,17 @@
                 <div class="row">
                     <div class="form-group col-md-9">
                         <label for="fullname">Nome Completo</label>
-                        <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Digite o seu nome completo sem abreviar" required="" value="{{ $owner->fullname }}">
+                        <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Digite o seu nome completo sem abreviar" required="" value="{{ $owner->fullname ?? null }}">
                     </div>
 
                     <div class="form-group col-md-3">
                         <label for="condition">Condição</label>
                         <select class="form-control" id="condition" name="condition">
-                            <option value="alugado" {{ $owner->condition == 'alugado' ? 'selected' : ''}}>alugado</option>
-                            <option value="residindo" {{ $owner->condition == 'residindo' ? 'selected' : ''}}>residindo</option>
-                            <option value="aluga-se" {{ $owner->condition == 'aluga-se' ? 'selected' : ''}}>aluga-se</option>
-                            <option value="vende-se" {{ $owner->condition == 'vende-se' ? 'selected' : ''}}>vende-se</option>
-                            <option value="vazio" {{ $owner->condition == 'vazio' ? 'selected' : ''}}>vazio</option>
+                            <option value="alugado" {{ $owner->apartment->condition == 'alugado' ? 'selected' : ''}}>alugado</option>
+                            <option value="residindo" {{ $owner->apartment->condition == 'residindo' ? 'selected' : ''}}>residindo</option>
+                            <option value="aluga-se" {{ $owner->apartment->condition == 'aluga-se' ? 'selected' : ''}}>aluga-se</option>
+                            <option value="vende-se" {{ $owner->apartment->condition == 'vende-se' ? 'selected' : ''}}>vende-se</option>
+                            <option value="vazio" {{ $owner->apartment->condition == 'vazio' ? 'selected' : ''}}>vazio</option>
                         </select>
                     </div>
                 </div>
@@ -56,8 +56,8 @@
                     <div class="form-group col-md-4">
                         <label for="gender">Sexo</label>
                         <select class="form-control" id="gender" name="gender">
-                            <option value="masculino" {{ $owner->gender == 'masculino' ? 'selected' : ''}}>masculino</option>
-                            <option value="feminino" {{ $owner->gender == 'feminino' ? 'selected' : ''}}>feminino</option>
+                            <option value="masculino" {{ !isset($owner->owner->gender) || $owner->gender == 'masculino' ? 'selected' : ''}}>masculino</option>
+                            <option value="feminino" {{ !isset($owner->owner->gender) || $owner->gender == 'feminino' ? 'selected' : ''}}>feminino</option>
                         </select>
                     </div>
 
@@ -69,7 +69,7 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" class="form-control" id="birthday" name="birthday" placeholder="xx/xx/xxxx" value="{{ $owner->birthday }}">
+                            <input type="text" class="form-control" id="birthday" name="birthday" placeholder="xx/xx/xxxx" value="{{ $owner->birthday ?? null }}">
                         </div>
                         <!-- /.input group -->
                     </div>
@@ -77,24 +77,31 @@
 
                     <div class="form-group col-md-4">
                         <label for="phone">Telefone</label>
-                        <input type="text" class="form-control" id="phone" name="phone" placeholder="(xx) xxxxx-xxxx" required="" value="{{ $owner->phone }}">
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="(xx) xxxxx-xxxx" required="" value="{{ $owner->phone ?? null }}">
                     </div>
                 </div>
 
                 <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="email">Email</label><span class="text-muted" style="margin-left: 10px">(Opcional)</span>
+                        <input type="text" class="form-control" id="email" name="email" placeholder="xx.xxx.xxx-x" value="{{ $owner->email ?? null }}">
+                    </div>
+
                     <div class="form-group col-md-3">
                         <label for="rg">RG</label><span class="text-muted" style="margin-left: 10px">(Opcional)</span>
-                        <input type="text" class="form-control" id="rg" name="rg" placeholder="xx.xxx.xxx-x" value="{{ $owner->rg }}">
+                        <input type="text" class="form-control" id="rg" name="rg" placeholder="xx.xxx.xxx-x" value="{{ $owner->rg ?? null }}">
                     </div>
 
                     <div class="form-group col-md-3">
                         <label for="cpf">CPF</label><span class="text-muted" style="margin-left: 10px">(Opcional)</span>
-                        <input type="text" class="form-control" id="cpf" name="cpf" placeholder="xxx.xxx.xxx-xx" value="{{ $owner->cpf }}">
+                        <input type="text" class="form-control" id="cpf" name="cpf" placeholder="xxx.xxx.xxx-xx" value="{{ $owner->cpf ?? null }}">
                     </div>
+                </div>
 
-                    <div class="form-group col-md-6">
-                        <label for="email">Email</label><span class="text-muted" style="margin-left: 10px">(Opcional)</span>
-                        <input type="text" class="form-control" id="email" name="email" placeholder="xx.xxx.xxx-x" value="{{ $owner->email }}">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="observation">Observação</label><span class="text-muted" style="margin-left: 10px">(Opcional)</span>
+                        <input type="text" class="form-control" id="observation" name="observation" placeholder="" value="{{ $owner->observation ?? null }}">
                     </div>
                 </div>
 

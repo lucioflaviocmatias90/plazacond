@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Classified;
-use App\Apartment;
+use App\Repositories\ApartmentRepository;
 
 class ClassifiedController extends Controller
 {
@@ -24,10 +24,9 @@ class ClassifiedController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(ApartmentRepository $repo)
     {
-        $owners = Apartment::all(['id', 'blap']);
-        return view('classifieds.create', compact('owners'));
+        return view('classifieds.create', ['owners'=>$repo->getAll()]);
     }
 
     /**
@@ -38,7 +37,7 @@ class ClassifiedController extends Controller
      */
     public function store(Request $request)
     {
-        Classified::create($request->all());
+        Classified::create($request->except('photo_path'));
         return redirect()->route('classified.index');
     }
 
@@ -65,9 +64,12 @@ class ClassifiedController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(ApartmentRepository $repo, $id)
     {
-        //
+        return view('classifieds.edit', [
+            'classified' => Classified::findOrFail($id),
+            'owners' => $repo->getAll(),
+        ]);
     }
 
     /**
@@ -79,7 +81,8 @@ class ClassifiedController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Classified::findOrFail($id)->update($request->all());
+        return redirect()->route('classified.edit');
     }
 
     /**

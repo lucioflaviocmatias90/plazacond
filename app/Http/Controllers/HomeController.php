@@ -8,6 +8,7 @@ use App\Owner;
 use App\Resident;
 use App\Vehicle;
 use App\Classified;
+use App\Apartment;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -20,7 +21,7 @@ class HomeController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     /**
@@ -42,7 +43,7 @@ class HomeController extends Controller
 
     public function residentsCount()
     {
-        $owners = Owner::where('condition', '=', 'residindo')->count();
+        $owners = Apartment::where('condition', '=', 'residindo')->count();
         $residents = Resident::all()->count();
         return $owners + $residents;
     }

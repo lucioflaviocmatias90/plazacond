@@ -44,7 +44,7 @@
 					<tbody>
 						@foreach($residents as $resident)
 						<tr>
-					        <td>{{ $resident->owner->blap }}</td>
+					        <td>{{ $resident->owner->apartment->blap }}</td>
 					        <td>{{ $resident->fullname }}</td>
 					        <td>{{ $resident->phone }}</td>
 					        <td>{{ $resident->gender }}</td>

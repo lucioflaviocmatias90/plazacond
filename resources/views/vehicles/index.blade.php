@@ -46,7 +46,7 @@
 					<tbody>
 						@foreach($vehicles as $vehicle)
 						<tr>
-				        	<td>{{ $vehicle->owner->blap }}</td>
+				        	<td>{{ $vehicle->owner->apartment->blap }}</td>
 					        <td>{{ $vehicle->brand }}</td>
 					        <td>{{ $vehicle->model }}</td>
 					        <td>{{ $vehicle->type_vehicle }}</td>

@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Resident;
-use App\Apartment;
 use App\Enums\ResidentType;
 use Illuminate\Support\Facades\Storage;
+use App\Repositories\ApartmentRepository;
+use App\Repositories\ImageRepository;
 
 class ResidentController extends Controller
 {
@@ -18,23 +19,25 @@ class ResidentController extends Controller
      */
     public function index()
     {
-        $residents = Resident::with('owner')->paginate(10);
+        $residents = Resident::with('owner.apartment')->paginate(10);
         return view('residents.index', compact('residents'));
     }
 
-    public function create()
+    public function create(ApartmentRepository $repo)
     {
-        $owners = Apartment::all(['id', 'blap']);
-        $residenType = ResidentType::toSelectArray();
-        return view('residents.create', compact(['residenType', 'owners']));
+        return view('residents.create', [
+            'residenType' => ResidentType::toSelectArray(),
+            'owners' => $repo->getAll(),
+        ]);
     }
 
-    public function edit($id)
+    public function edit(ApartmentRepository $repo, $id)
     {   
-        $owners = Apartment::all(['id', 'blap']);
-        $residenType = ResidentType::toSelectArray();
-        $resident = Resident::with('owner')->findOrFail($id);
-        return view('residents.edit', compact(['resident', 'residenType', 'owners']));
+        return view('residents.edit', [
+            'resident' => Resident::with('owner')->findOrFail($id),
+            'residenType' => ResidentType::toSelectArray(), 
+            'owners' => $repo->getAll(),
+        ]);
     }
 
     public function search(Request $request)
@@ -53,10 +56,10 @@ class ResidentController extends Controller
     public function store(Request $request)
     {
         $resident = Resident::create($request->except('photo_path'));
-        if ($request->hasFile('photo_path')) {
-            $path = $request->file('photo_path')->store('residents', 'public');
-            Resident::findOrFail($resident->id)->update(['photo_path'=>$path]);
-        }
+        // if ($request->hasFile('photo_path')) {
+        //     $path = $request->file('photo_path')->store('residents', 'public');
+        //     Resident::findOrFail($resident->id)->update(['photo_path'=>$path]);
+        // }
         return redirect()->route('resident.index')->with('success', 'Morador cadastrado com sucesso!');
     }
 
@@ -100,5 +103,10 @@ class ResidentController extends Controller
     {
         Resident::findOrFail($id)->delete();
         return back();
+    }
+
+    public function uploadImageCrop(ImageRepository $repo, Request $request)
+    {
+        # code...
     }
 }

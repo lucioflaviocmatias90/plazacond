@@ -112,7 +112,7 @@
 
                 console.log(res);
 
-                return {title: `${res.owner.blap} - ${res.status}`, start: res.date_marked, end: res.date_delivery, url: `/kiosk/${res.id}`}
+                return {title: `${res.owner.apartment.blap} - ${res.status}`, start: res.date_marked, end: res.date_delivery, url: `/kiosk/${res.id}`}
             });
 
             var calendarEl = document.getElementById('calendar');

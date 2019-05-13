@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Letter;
-use App\Apartment;
+use App\Repositories\ApartmentRepository;
 
 class LetterController extends Controller
 {
@@ -15,21 +15,15 @@ class LetterController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function getOwners()
-    {
-        return Apartment::all(['id', 'blap']);
-    }
-
     public function index()
     {
         $letters = Letter::with('owner')->paginate(10);
         return view('letters.index',compact('letters'));
     }
 
-    public function create()
+    public function create(ApartmentRepository $repo)
     {
-        // $owners = Owner::all(['id', 'blap']);
-        return view('letters.create', ['owners'=>$this->getOwners()]);
+        return view('letters.create', ['owners'=>$repo->getAll()]);
     }
 
     /**
@@ -55,10 +49,10 @@ class LetterController extends Controller
         //
     }
 
-    public function edit($id)
+    public function edit(ApartmentRepository $repo, $id)
     {
         $letter = Letter::findOrFail($id);
-        return view('letters.edit', ['letter'=>$letter, 'owners'=>$this->getOwners()]);
+        return view('letters.edit', ['letter'=>$letter, 'owners'=>$repo->getAll()]);
     }
 
     /**

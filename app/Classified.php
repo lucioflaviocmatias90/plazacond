@@ -9,6 +9,8 @@ class Classified extends Model
 {
 	use SoftDeletes;
 
+	protected $fillable = ['title', 'price', 'description', 'photo_path', 'owner_id'];
+
 	protected $dates = ['deleted_at'];
 
     public function owner()

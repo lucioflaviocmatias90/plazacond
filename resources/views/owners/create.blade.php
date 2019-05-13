@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', ' | Visitantes')
+@section('title', ' | Proprietários')
 
 @section('content_header')
 @stop
@@ -8,18 +8,16 @@
 @section('content')
 <div class="box">
 	<div class="box-header with-border">
-		<h3 class="box-title">Novo Visitante</h3>
+		<h3 class="box-title">Novo Proprietário</h3>
 	</div>
 	<!-- /.box-header -->
 
 	<!-- form start -->
-    <form role="form" action="{{ route('visitor.store') }}" method="POST" enctype="multipart/form-data">
+    <form role="form" action="{{ route('owner.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="box-body">
             <div class="col-md-3">
                 <img class="profile-user-img img-responsive img-circle" src="/img/profile.png" alt="User profile picture">
-
-                <p class="text-muted text-center">Proprietário - A/12</p>
 
                 <div class="form-group">
                     <label for="photo_path">Selecione uma foto</label>
@@ -30,14 +28,24 @@
             <div class="col-md-9">                
 
                 <div class="row">
-                    <div class="form-group col-md-12">
+                    <div class="form-group col-md-10">
                         <label for="fullname">Nome Completo</label>
                         <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Digite o seu nome completo sem abreviar" required="" autofocus="">
                     </div>
+
+                    <div class="form-group col-md-2">
+                        <label for="apartment_id">Bl/Ap</label>
+                        <select class="form-control" name="apartment_id" id="apartment_id">
+                            @foreach($owners as $owner)
+                            <option value="{{ $owner->id }}">{{ $owner->blap }}</option>
+                            @endforeach
+                        </select>
+                    </div>                      
                 </div>  
 
                 <div class="row">
-                    <div class="form-group col-md-4">
+
+                    <div class="form-group col-md-3">
                         <label for="gender">Sexo</label>
                         <select class="form-control" name="gender">
                             <option value="masculino">Masculino</option>
@@ -46,8 +54,8 @@
                     </div>
 
                     <!-- Date dd/mm/yyyy -->
-                    <div class="form-group col-md-4">
-                        <label>Data Nascimento:</label><span class="text-muted" style="margin-left: 10px">(Opcional)</span>
+                    <div class="form-group col-md-3">
+                        <label>Data Nascimento:</label>
 
                         <div class="input-group">
                             <div class="input-group-addon">
@@ -59,24 +67,46 @@
                     </div>
                     <!-- /.form group -->
 
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-3">
                         <label for="phone">Telefone</label>
                         <input type="text" class="form-control" id="phone" name="phone" placeholder="(xx) xxxxx-xxxx" required="">
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label for="condition">Condição</label>
+                        <select class="form-control" id="condition" name="condition">
+                            <option value="alugado">alugado</option>
+                            <option value="residindo">residindo</option>
+                            <option value="aluga-se">aluga-se</option>
+                            <option value="vende-se">vende-se</option>
+                            <option value="vazio">vazio</option>
+                        </select>
                     </div>
                 </div>              
 
                 <div class="row">
                     <div class="form-group col-md-6">
+                        <label for="email">Email</label><span class="text-muted" style="margin-left: 10px">(Opcional)</span>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="xx.xxx.xxx-x">
+                    </div>
+
+                    <div class="form-group col-md-3">
                         <label for="rg">RG</label><span class="text-muted" style="margin-left: 10px">(Opcional)</span>
                         <input type="text" class="form-control" id="rg" name="rg" placeholder="xx.xxx.xxx-x">
                     </div>
 
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-3">
                         <label for="cpf">CPF</label><span class="text-muted" style="margin-left: 10px">(Opcional)</span>
                         <input type="text" class="form-control" id="cpf" name="cpf" placeholder="xxx.xxx.xxx-xx">
                     </div>
-                </div>                
-                 
+                </div> 
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="observation">Observação</label><span class="text-muted" style="margin-left: 10px">(Opcional)</span>
+                        <input type="text" class="form-control" id="observation" name="observation" placeholder="" value="{{ $owner->observation ?? null }}">
+                    </div>
+                </div>  
             </div>                               
         </div>
         <!-- /.box-body -->

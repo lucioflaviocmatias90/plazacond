@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Apartment;
+use App\Repositories\ApartmentRepository;
 use App\Visit;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -19,11 +19,10 @@ class VisitController extends Controller
         //
     }
 
-    public function edit($id)
+    public function edit(ApartmentRepository $repo, $id)
     {
-        $owners = Apartment::all(['id', 'blap']);
         $visit = Visit::findOrFail($id);
-        return view('visits.edit', ['owners'=>$owners, 'visit'=>$visit]);
+        return view('visits.edit', ['owners'=>$repo->getAll(), 'visit'=>$visit]);
     }
 
     /**

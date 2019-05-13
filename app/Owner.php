@@ -9,9 +9,14 @@ class Owner extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['blap', 'fullname', 'condition', 'birthday', 'email', 'rg', 'cpf', 'gender', 'phone', 'photo_path', 'observation'];
+    protected $fillable = ['fullname', 'birthday', 'email', 'rg', 'cpf', 'gender', 'phone', 'photo_path', 'observation', 'apartment_id'];
 
     protected $dates = ['deleted_at'];
+
+    public function apartment()
+    {
+        return $this->belongsTo('App\Apartment');
+    }
     
     public function resident()
     {

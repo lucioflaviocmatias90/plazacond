@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Vehicle;
-use App\Apartment;
 use App\Http\Requests\VehicleRequest;
+use App\Repositories\ApartmentRepository;
 
 class VehicleController extends Controller
 {
@@ -28,15 +28,13 @@ class VehicleController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function create()
+    public function create(ApartmentRepository $repo)
     {
-        $owners = Apartment::all(['id', 'blap']);
-        return view('vehicles.create', compact('owners'));
+        return view('vehicles.create', ['owners'=>$repo->getAll()]);
     }
     
     public function store(VehicleRequest $request)
     {
-        $validated = $request->validated();
         Vehicle::create($request->all());
         return redirect()->route('vehicle.index');
     }
@@ -71,9 +69,10 @@ class VehicleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(VehicleRequest $request, $id)
     {
-        //
+        Vehicle::findOrFail($id)->update($request->all());
+        return redirect()->route('vehicle.index');
     }
 
     /**

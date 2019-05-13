@@ -9,20 +9,28 @@
 @section('content')
 <div class="box">
 	<div class="box-header">
-		<form action="{{ route('owner.search') }}" method="POST">
-			@csrf
-			<div class="input-group">
-				<input type="text" class="form-control" id="search" name="search" placeholder="Digite o nome ou Bl/Ap do proprietário">
-				<span class="input-group-btn">
-					<button type="submit" class="btn btn-default" type="button"><i class="fa fa-search"></i>  Pesquisar</button>
-				</span>
+		<div class="row">
+			<div class="col-md-3">
+				<a href="{{ route('owner.create') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Proprietário</a>
 			</div>
-		</form>
+			<div class="col-md-5 pull-right">
+				<form action="{{ route('owner.search') }}" method="POST">
+					@csrf
+					<div class="input-group">
+						<input type="text" class="form-control" name="search" placeholder="Digite o nome do Proprietário">
+						<span class="input-group-btn">
+							<button type="submit" class="btn btn-default" type="button"><i class="fa fa-search"></i>  Pesquisar</button>
+						</span>
+					</div>
+				</form>
+			</div>			
+		</div>		
 	</div>
 	<!-- /.box-header -->
 	<div class="box-body">    
 		<div class="row">
 			<div class="col-sm-12">
+				@if($owners->count() > 0)
 				<table id="tabela" class="table table-bordered table-hover dataTable">
 					<thead>
 						<tr>
@@ -34,46 +42,49 @@
 						</tr>
 					</thead>
 					<tbody>
-						@forelse($owners as $ow)
+						@foreach($owners as $ow)
 						<tr>
-					        <td>{{ $ow->blap }}</td>
+					        <td>{{ $ow->apartment->blap }}</td>
 					        <td>{{ $ow->fullname }}</td>
 					        <td>
-					        @switch($ow->condition)	  
+					        @switch($ow->apartment->condition)	  
 
 						    	@case('vazio')
-						        <span class="label label-default">{{ $ow->condition }}</span>
+						        <span class="label label-default">{{ $ow->apartment->condition }}</span>
 						        @break;
 
 							    @case('alugado')
-							    <span class="label label-primary">{{ $ow->condition }}</span>
+							    <span class="label label-primary">{{ $ow->apartment->condition }}</span>
 						        @break;
 
 							    @case('residindo')
-						        <span class="label label-success">{{ $ow->condition }}</span>
+						        <span class="label label-success">{{ $ow->apartment->condition }}</span>
 						        @break;
 
 							    @case('vende-se')
-						        <span class="label label-danger">{{ $ow->condition }}</span>
+						        <span class="label label-danger">{{ $ow->apartment->condition }}</span>
 						        @break;
 
 							    @case('aluga-se')
-						        <span class="label label-warning">{{ $ow->condition }}</span>
+						        <span class="label label-warning">{{ $ow->apartment->condition }}</span>
 						        @break;
 								    
 							@endswitch
 					        </td>
-					        <td>{{ $ow->phone }}</td>
+					        <td>{{ $ow->phone ?? '--' }}</td>
 					        <td>
 						        <div class="btn-group">
 							        <a href="{{ route('owner.show', ['owner'=>$ow->id]) }}" class="btn btn-xs btn-info"><i class="fa fa-eye"></i> ver</a>
 							        <a href="{{ route('owner.edit', ['owner'=>$ow->id]) }}" class="btn btn-xs btn-warning"><i class="fa fa-pencil"></i> editar</a>
+							        <form action="{{ route('owner.destroy', ['owner'=>$ow->id]) }}" method="POST" style="display: inline;">
+							        	@csrf
+							        	@method('DELETE')
+							        	<button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> apagar</button>
+							        </form>
 						        </div>
 					        </td>
 				        </tr>
-				        @empty
-				        <p>nada pra mostrar</p>
-				        @endif
+				        @endforeach				        
 					</tbody>
 					<tfoot>
 						<tr>
@@ -85,6 +96,11 @@
 						</tr>
 					</tfoot>
 				</table>
+				@else
+				<div class="callout callout-danger">
+                    <h4>Nenhum proprietário cadastrado!</h4>
+                </div>
+				@endif
 			</div>
 		</div>
 	</div>

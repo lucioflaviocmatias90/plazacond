@@ -44,7 +44,7 @@
 					<tbody>
 						@foreach($letters as $letter)
 						<tr>
-							<td>{{ $letter->owner->blap }}</td>
+							<td>{{ $letter->owner->apartment->blap }}</td>
 					        <td>{{ $letter->title }}</td>
 					        <td>
 					        	<span class="label label-{{ $letter->status == 'portaria' ? 'warning' : 'info' }}">{{ $letter->status }}</span>

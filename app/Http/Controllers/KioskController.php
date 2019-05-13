@@ -6,6 +6,7 @@ use App\Kiosk;
 use App\Apartment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Repositories\ApartmentRepository;
 
 class KioskController extends Controller
 {
@@ -14,19 +15,14 @@ class KioskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getOwners()
+    public function index(ApartmentRepository $repo)
     {
-        return Apartment::all(['id', 'blap']);
-    }
-
-    public function index()
-    {
-        return view('kiosks.index', ['owners'=>$this->getOwners()]);
+        return view('kiosks.index', ['owners'=>$repo->getAll()]);
     }
 
     public function indexJson()
     {
-        return Kiosk::with('owner')->get();
+        return Kiosk::with('owner.apartment')->get();
     }
 
     /**
@@ -47,10 +43,10 @@ class KioskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(ApartmentRepository $repo, $id)
     {
         $kiosk = Kiosk::findOrFail($id);
-        return view('kiosks.show', ['kiosk'=>$kiosk, 'owners'=>$this->getOwners()]);
+        return view('kiosks.show', ['kiosk'=>$kiosk, 'owners'=>$repo->getAll()]);
     }
 
     /**

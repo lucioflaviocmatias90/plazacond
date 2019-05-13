@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Apartment;
+use App\Repositories\ApartmentRepository;
 use App\Notice;
 
 class NoticeController extends Controller
@@ -19,10 +19,9 @@ class NoticeController extends Controller
         //
     }
 
-    public function create()
+    public function create(ApartmentRepository $repo)
     {
-        $owners = Apartment::all(['id', 'blap']);
-        return view('notices.create',compact('owners'));
+        return view('notices.create', ['owners'=>$repo->getAll()]);
     }
 
     /**
