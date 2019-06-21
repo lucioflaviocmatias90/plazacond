@@ -10,23 +10,11 @@ use App\Repositories\ApartmentRepository;
 
 class VehicleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $vehicles = Vehicle::with('owner')->paginate(10);
         return view('vehicles.index', compact('vehicles'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
 
     public function create(ApartmentRepository $repo)
     {
@@ -36,7 +24,7 @@ class VehicleController extends Controller
     public function store(VehicleRequest $request)
     {
         Vehicle::create($request->all());
-        return redirect()->route('vehicle.index');
+        return redirect()->route('vehicle.index')->with('success', 'Veículo cadastrado com sucesso!');
     }
 
     public function search(Request $request)
@@ -45,16 +33,10 @@ class VehicleController extends Controller
         return view('vehicles.index', compact('vehicles'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit(ApartmentRepository $repo, $id)
     {
         $vehicle = Vehicle::findOrFail($id);
-        return view('vehicles.edit', compact('vehicle'));
+        return view('vehicles.edit', ['owners'=>$repo->getAll(), 'vehicle' => $vehicle]);
     }
 
     public function show($id)
@@ -62,28 +44,15 @@ class VehicleController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(VehicleRequest $request, $id)
     {
         Vehicle::findOrFail($id)->update($request->all());
-        return redirect()->route('vehicle.index');
+        return redirect()->route('vehicle.index')->with('updated', 'Veículo atualizado com sucesso!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         Vehicle::findOrFail($id)->delete();
-        return back();
+        return back()->with('deleted', 'Veículo excluído com sucesso!');
     }
 }

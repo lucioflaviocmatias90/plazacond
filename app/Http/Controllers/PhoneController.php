@@ -2,38 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Phone;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class PhoneController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return view('phones.index', ['phones'=>Phone::paginate(10)]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        Phone::create($request->all());
+        return redirect()->route('phone.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //

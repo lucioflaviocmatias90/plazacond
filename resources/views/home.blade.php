@@ -225,10 +225,10 @@
             <div class="col-md-4">
                 <!-- Info Boxes Style 2 -->
                 <div class="info-box bg-yellow">
-                    <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
+                    <span class="info-box-icon"><i class="ion ion-model-s"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">Inventory</span>
+                        <span class="info-box-text">Carros</span>
                         <span class="info-box-number">5,200</span>
 
                         <div class="progress">
@@ -245,7 +245,7 @@
                     <span class="info-box-icon"><i class="ion ion-ios-heart-outline"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">Mentions</span>
+                        <span class="info-box-text">Motos</span>
                         <span class="info-box-number">92,050</span>
 
                         <div class="progress">
@@ -262,7 +262,7 @@
                     <span class="info-box-icon"><i class="ion ion-ios-cloud-download-outline"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">Downloads</span>
+                        <span class="info-box-text">Utilitários</span>
                         <span class="info-box-number">114,381</span>
 
                         <div class="progress">
@@ -270,23 +270,6 @@
                         </div>
                         <span class="progress-description">
 								70% Increase in 30 Days
-							</span>
-                    </div>
-                    <!-- /.info-box-content -->
-                </div>
-                <!-- /.info-box -->
-                <div class="info-box bg-aqua">
-                    <span class="info-box-icon"><i class="ion-ios-chatbubble-outline"></i></span>
-
-                    <div class="info-box-content">
-                        <span class="info-box-text">Direct Messages</span>
-                        <span class="info-box-number">163,921</span>
-
-                        <div class="progress">
-                            <div class="progress-bar" style="width: 40%"></div>
-                        </div>
-                        <span class="progress-description">
-								40% Increase in 30 Days
 							</span>
                     </div>
                     <!-- /.info-box-content -->
@@ -341,7 +324,7 @@
                             @foreach($classifieds as $classified)
                             <li class="item">
                                 <div class="product-img">
-                                    <img src="img/profile.png" alt="Product Image">
+                                    <img src="{{ $classified->photo_path == '' ? '/img/no_image.jpg' : str_replace(['["', '"]', '\\'], ['', '', ''], $classified->photo_path) }}" alt="Product Image">
                                 </div>
                                 <div class="product-info">
                                     <a href="{{ route('classified.show', ['classified'=>$classified->id]) }}" class="product-title">{{ $classified->title }}
@@ -376,6 +359,7 @@
 
 @section('js')
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
     <script>
         var residindo = 0;
         var alugado = 0;

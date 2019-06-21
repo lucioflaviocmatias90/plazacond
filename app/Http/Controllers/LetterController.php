@@ -35,7 +35,7 @@ class LetterController extends Controller
     public function store(Request $request)
     {
         Letter::create($request->all());
-        return redirect()->route('owner.show', [$request->owner_id]);
+        return redirect()->route('owner.show', [$request->owner_id])->with('success', 'Correspondência cadastrado com sucesso!');
     }
 
     /**
@@ -65,7 +65,7 @@ class LetterController extends Controller
     public function update(Request $request, $id)
     {
         Letter::findOrFail($id)->update($request->all());
-        return redirect()->route('letter.index');
+        return redirect()->route('letter.index')->with('updated', 'Correspondência atualizado com sucesso!');
     }
 
     /**
@@ -77,6 +77,6 @@ class LetterController extends Controller
     public function destroy($id)
     {
         Letter::findOrFail($id)->delete();
-        return back();
+        return back()->with('deleted', 'Correspondência excluído com sucesso!');
     }
 }

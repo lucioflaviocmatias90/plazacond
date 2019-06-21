@@ -16,7 +16,7 @@ class NoticeController extends Controller
      */
     public function index()
     {
-        //
+        return view('notices.index', ['notices'=>Notice::with('owner')->paginate(10)]);
     }
 
     public function create(ApartmentRepository $repo)
@@ -33,7 +33,7 @@ class NoticeController extends Controller
     public function store(Request $request)
     {
         Notice::create($request->all());
-        return redirect()->route('owner.show', [$request->owner_id]);
+        return redirect()->route('notice.index')->with('success', 'Comunicado cadastrado com sucesso!');
     }
 
     /**
@@ -56,7 +56,7 @@ class NoticeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //->with('updated', 'Comunicado atualizado com sucesso!')
     }
 
     /**
@@ -68,6 +68,6 @@ class NoticeController extends Controller
     public function destroy($id)
     {
         Notice::findOrFail($id)->delete();
-        return back();
+        return back()->with('deleted', 'Comunicado excluído com sucesso!');
     }
 }

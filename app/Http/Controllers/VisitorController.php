@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\ApartmentRepository;
+use App\Services\ImageService;
 use App\Visitor;
 use App\Apartment;
 use Illuminate\Http\Request;
@@ -9,23 +11,19 @@ use App\Http\Controllers\Controller;
 
 class VisitorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $service;
+
+    public function __construct()
+    {
+        $this->service = new ImageService(['photo_path'], 'visitors');
+    }
+
     public function index()
     {
         $visitors = Visitor::paginate(10);
         return view('visitors.index', compact('visitors'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public  function create()
     {
         return view('visitors.create');
@@ -33,24 +31,14 @@ class VisitorController extends Controller
 
     public function store(Request $request)
     {
-        $visitor = new Visitor();
-
-        $visitor->fullname = $request->input('fullname');
-        $visitor->rg = $request->input('rg');
-        $visitor->cpf = $request->input('cpf');
-        $visitor->gender = $request->input('gender');
-        // $visitor->birthday = $request->input('birthday');
-        $visitor->phone = $request->input('phone');
-
-        $visitor->save();
-
-        return redirect()->route('visitor.index');
+        $visitor = Visitor::create($request->except('photo_path'));
+        $this->service->uploadImage($request, $visitor);
+        return redirect()->route('visitor.index')->with('success', 'Visitante cadastrado com sucesso!');
     }
 
     public function visitStore(Request $request, $id)
     {
         $visitor = Visitor::with('owner')->findOrFail($id);
-        //dd($id);
 
         $visitor->owner()->attach($request->input('owner_id'), [
             'entry_date'=>$request->input('entry_date'),
@@ -59,22 +47,15 @@ class VisitorController extends Controller
             'departure_hour'=>$request->input('departure_hour'),
             'observation'=>$request->input('observation'),
         ]);
-
         return back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function show(ApartmentRepository $repo, $id)
     {
-        $owners = Apartment::all(['id', 'blap']);
-        $visitor = Visitor::findOrFail($id);
-        $visits = Visitor::with('owner')->findOrFail($id);
-        return view('visitors.show', compact(['visitor', 'visits', 'owners']));
+        return view('visitors.show', [
+            'apartments' => $repo->getAll(),
+            'visitor' => Visitor::with('owner')->findOrFail($id)
+        ]);
     }
 
     public function edit($id)
@@ -83,29 +64,16 @@ class VisitorController extends Controller
         return view('visitors.edit', compact('visitor'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $visitor = Visitor::findOrFail($id);
         $visitor->update($request->except('photo_path'));
-        return redirect()->route('visitor.index');
+        return redirect()->route('visitor.index')->with('updated', 'Visitante atualizado com sucesso!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         Visitor::findOrFail($id)->delete();
-        return back();
+        return back()->with('deleted', 'Visitante excluído com sucesso!');
     }
 }

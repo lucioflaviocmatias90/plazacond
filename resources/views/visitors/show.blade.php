@@ -13,7 +13,7 @@
 	<!-- /.box-header -->
     <div class="box-body">
         <div class="col-md-2">
-            <img class="img-responsive img-circle" src="/img/profile.png" alt="User profile picture">
+            <img class="img-responsive img-circle" src="{{ $visitor->photo_path == '' ? '/img/profile.png' : str_replace(['["', '"]', '\\'], ['', '', ''], $visitor->photo_path) }}" alt="User profile picture">
         </div>
         <div class="col-md-10">
 
@@ -98,7 +98,7 @@
     <div class="box-body">
         <div class="row">
             <div class="col-sm-12">
-                @if($visits->owner->count() > 0)
+                @if($visitor->owner->count() > 0)
                     <table id="tabela" class="table table-bordered table-hover dataTable">
                         <thead>
                         <tr>
@@ -112,18 +112,18 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($visits->owner as $visit)
+                        @foreach($visitor->owner as $owner)
                             <tr>
-                                <td>{{ $visit->blap }}</td>
-                                <td>{{ $visit->pivot->entry_date }}</td>
-                                <td>{{ $visit->pivot->departure_date }}</td>
-                                <td>{{ $visit->pivot->entry_hour }}</td>
-                                <td>{{ $visit->pivot->departure_hour }}</td>
-                                <td>{{ $visit->pivot->observation }}</td>
+                                <td>{{ $owner->apartment->blap }}</td>
+                                <td>{{ $owner->pivot->entry_date }}</td>
+                                <td>{{ $owner->pivot->entry_hour }}</td>
+                                <td>{{ $owner->pivot->departure_date }}</td>
+                                <td>{{ $owner->pivot->departure_hour }}</td>
+                                <td>{{ $owner->pivot->observation }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <a href="{{ route('visit.edit', ['visit'=>$visit->pivot->id]) }}" class="btn btn-xs btn-warning"><i class="fa fa-pencil"></i> editar</a>
-                                        <form action="{{ route('visit.destroy', ['visit'=>$visit->pivot->id]) }}" method="POST" style="display: inline;">
+                                        <a href="{{ route('visit.edit', ['visit'=>$owner->pivot->id]) }}" class="btn btn-xs btn-warning"><i class="fa fa-pencil"></i> editar</a>
+                                        <form action="{{ route('visit.destroy', ['visit'=>$owner->pivot->id]) }}" method="POST" style="display: inline;">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash"> apagar</i></button>
@@ -171,11 +171,12 @@
                     <h4 class="modal-title" id="gridSystemModalLabel">Cadastrar Visita</h4>
                 </div>
                 <div class="modal-body">
+{{--                    <input type="hidden" name="visitor_id" value="{{ $visitor->id }}">--}}
                     <div class="form-group col-md-2">
                         <label for="owner_id">Bl/Ap</label>
                         <select class="form-control" name="owner_id" id="owner_id">
-                            @foreach($owners as $owner)
-                                <option value="{{ $owner->id }}" {{ $owner->id == session('owner_id') ? 'selected' : '' }}>{{ $owner->blap }}</option>
+                            @foreach($apartments as $apart)
+                                <option value="{{ $apart->id }}">{{ $apart->blap }}</option>
                             @endforeach
                         </select>
                     </div>

@@ -35,7 +35,7 @@
                     <div class="row">                    
                         <div class="form-group col-md-12">
                             <label for="photo_path">Foto</label>
-                            <input type="file" name="photo_path">
+                            <input type="file" name="photo_path[]">
                         </div>                  
                     </div>  
                     <div class="row">                    

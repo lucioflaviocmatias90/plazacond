@@ -30,6 +30,22 @@
 	<div class="box-body">    
 		<div class="row">
 			<div class="col-sm-12">
+				@if(session('success'))
+					<div class="alert alert-success alert-dismissible">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+						<h4><i class="icon fa fa-check"></i> {{ session('success') }}</h4>
+					</div>
+				@elseif(session('updated'))
+					<div class="alert alert-warning alert-dismissible">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+						<h4><i class="icon fa fa-check"></i> {{ session('updated') }}</h4>
+					</div>
+				@elseif(session('deleted'))
+					<div class="alert alert-danger alert-dismissible">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+						<h4><i class="icon fa fa-check"></i> {{ session('deleted') }}</h4>
+					</div>
+				@endif
 				@if($vehicles->count() > 0)
 				<table id="tabela" class="table table-bordered table-hover dataTable">
 					<thead>
@@ -45,24 +61,26 @@
 					</thead>
 					<tbody>
 						@foreach($vehicles as $vehicle)
-						<tr>
-				        	<td>{{ $vehicle->owner->apartment->blap }}</td>
-					        <td>{{ $vehicle->brand }}</td>
-					        <td>{{ $vehicle->model }}</td>
-					        <td>{{ $vehicle->type_vehicle }}</td>
-					        <td>{{ $vehicle->vehicle_color }}</td>
-					        <td>{{ $vehicle->vehicle_plate }}</td>
-					        <td>
-						        <div class="btn-group">
-							        <a href="{{ route('vehicle.edit', ['vehicle'=>$vehicle->id]) }}" class="btn btn-xs btn-warning"><i class="fa fa-pencil"></i> editar</a>
-							        <form action="{{ route('vehicle.destroy', ['vehicle'=>$vehicle->id]) }}" method="POST" style="display: inline;">
-							        	@csrf
-							        	@method('DELETE')
-							        	<button type="submit" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> excluir</button>
-							        </form>
-						        </div>
-					        </td>
-				        </tr>
+							@if($vehicle->owner)
+								<tr>
+									<td>{{ $vehicle->owner->apartment->blap }}</td>
+									<td>{{ $vehicle->brand }}</td>
+									<td>{{ $vehicle->model }}</td>
+									<td>{{ $vehicle->type_vehicle }}</td>
+									<td>{{ $vehicle->vehicle_color }}</td>
+									<td>{{ $vehicle->vehicle_plate }}</td>
+									<td>
+										<div class="btn-group">
+											<a href="{{ route('vehicle.edit', ['vehicle'=>$vehicle->id]) }}" class="btn btn-xs btn-warning"><i class="fa fa-pencil"></i> editar</a>
+											<form action="{{ route('vehicle.destroy', ['vehicle'=>$vehicle->id]) }}" method="POST" style="display: inline;">
+												@csrf
+												@method('DELETE')
+												<button type="submit" class="btn btn-xs btn-danger"><i class="fa fa-trash"></i> excluir</button>
+											</form>
+										</div>
+									</td>
+								</tr>
+							@endif
 				        @endforeach
 					</tbody>
 					<tfoot>

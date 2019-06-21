@@ -11,6 +11,22 @@
                     <h3 class="box-title">Novo Evento</h3>
                 </div>
                 <div class="box-body">
+                    @if(session('success'))
+                        <div class="alert alert-success alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4><i class="icon fa fa-check"></i> {{ session('success') }}</h4>
+                        </div>
+                    @elseif(session('updated'))
+                        <div class="alert alert-warning alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4><i class="icon fa fa-check"></i> {{ session('updated') }}</h4>
+                        </div>
+                    @elseif(session('deleted'))
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4><i class="icon fa fa-check"></i> {{ session('deleted') }}</h4>
+                        </div>
+                    @endif
                     <form action="{{ route('kiosk.store') }}" method="post">
                         @csrf
                         <label for="owner_id">Bl/Ap</label>

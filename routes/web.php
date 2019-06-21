@@ -44,13 +44,14 @@ Route::middleware('auth')->group(function() {
 
 	Route::post('letter/search', 'LetterController@search')->name('letter.search');
 
-	Route::post('classified/search', 'ClassifiedController@search')->name('classified.search');
+    Route::post('classified/search', 'ClassifiedController@search')->name('classified.search');
+
+    Route::post('notice/search', 'NoticeController@search')->name('notice.search');
 
 	Route::post('visitor/search', 'VisitorController@search')->name('visitor.search');
 
+    // CADASTRO DE VISITAS
 
-	// CADASTRO DE VISITAS
-
-	Route::post('visit/{visit}', 'VisitorController@visitStore')->name('visit.store');
+    Route::post('visit/{visit}', 'VisitorController@visitStore')->name('visit.store');
 
 });

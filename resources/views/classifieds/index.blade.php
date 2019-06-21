@@ -30,32 +30,25 @@
         <div class="box-body">
             <div class="row">
                 <div class="col-sm-12">
+                    @if(session('success'))
+                        <div class="alert alert-success alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4><i class="icon fa fa-check"></i> {{ session('success') }}</h4>
+                        </div>
+                    @elseif(session('updated'))
+                        <div class="alert alert-warning alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4><i class="icon fa fa-check"></i> {{ session('updated') }}</h4>
+                        </div>
+                    @elseif(session('deleted'))
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h4><i class="icon fa fa-check"></i> {{ session('deleted') }}</h4>
+                        </div>
+                    @endif
                     @if($classifieds->count() > 0)
                         <div class="row">
                             @foreach($classifieds as $classified)
-                                {{--<div class="col-sm-3">--}}
-                                {{--<div class="panel panel-default">--}}
-                                {{--<div class="panel-body">--}}
-                                {{--<img alt="Anilhas e halteres" aria-hidden="true" class="img-responsive" src="https://scontent.fsjp1-1.fna.fbcdn.net/v/t1.0-0/c0.139.540.540a/s370x247/56598185_2098036063617564_5193124032236486656_n.jpg?_nc_cat=103&amp;_nc_ht=scontent.fsjp1-1.fna&amp;oh=3697741cfaec9324ff81211cc5f8b22d&amp;oe=5D496717"  title="Anilhas e halteres">--}}
-                                {{--</div>--}}
-                                {{--<div id="list-example" class="list-group">--}}
-                                {{--<a class="list-group-item list-group-item-action" href="#list-item-1">{{ $classified->title }}</a>--}}
-                                {{--<a class="list-group-item list-group-item-action" href="#list-item-2">{{ $classified->price }}</a>--}}
-                                {{--<a class="list-group-item list-group-item-action" href="#list-item-3">{{ $classified->owner->blap }}</a>--}}
-                                {{--<a class="list-group-item list-group-item-action" href="#list-item-3">{{ $classified->description }}</a>--}}
-                                {{--</div>--}}
-                                {{--<div class="panel-footer">--}}
-                                {{--<div class="btn-group">--}}
-                                {{--<a href="{{ route('classified.edit', ['classified'=>$classified->id]) }}" class="btn btn-warning btn-sm">editar</a>--}}
-                                {{--<form action="{{ route('classified.destroy', ['classified'=>$classified->id]) }}" method="POST" style="display: inline;">--}}
-                                {{--@csrf--}}
-                                {{--@method('DELETE')--}}
-                                {{--<button type="submit" class="btn btn-danger btn-sm">apagar</button>--}}
-                                {{--</form>--}}
-                                {{--</div>--}}
-                                {{--</div>--}}
-                                {{--</div>--}}
-                                {{--</div>--}}
                                 <div class="_7yc _3ogd col-md-3">
                                     <a class="_1oem" data-testid="marketplace_feed_item"
                                        href="{{ route('classified.show', ['classified'=>$classified->id]) }}" title="{{ $classified->title }}">
@@ -64,7 +57,7 @@
                                                 <div>
                                                     <div class="_f3l _3fcx _4x3g">R$&nbsp;{{ $classified->price }}</div>
                                                     <img alt="{{ $classified->title }}" aria-hidden="true" class="_7ye img imagem"
-                                                         src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fmarketingdeconteudo.com%2Fwp-content%2Fuploads%2F2016%2F08%2Fimagens-gratis-6.jpg&f=1"
+                                                         src="{{ $classified->photo_path == '' ? '/img/no_image.jpg' : str_replace(['["', '"]', '\\'], ['', '', ''], $classified->photo_path) }}"
                                                          title="{{ $classified->title }}">
                                                 </div>
                                             </section>

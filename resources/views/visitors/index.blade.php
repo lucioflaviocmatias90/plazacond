@@ -30,6 +30,22 @@
 	<div class="box-body">    
 		<div class="row">
 			<div class="col-sm-12">
+				@if(session('success'))
+					<div class="alert alert-success alert-dismissible">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+						<h4><i class="icon fa fa-check"></i> {{ session('success') }}</h4>
+					</div>
+				@elseif(session('updated'))
+					<div class="alert alert-warning alert-dismissible">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+						<h4><i class="icon fa fa-check"></i> {{ session('updated') }}</h4>
+					</div>
+				@elseif(session('deleted'))
+					<div class="alert alert-danger alert-dismissible">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+						<h4><i class="icon fa fa-check"></i> {{ session('deleted') }}</h4>
+					</div>
+				@endif
                 @if($visitors->count() > 0)
 				<table id="tabela" class="table table-bordered table-hover dataTable">
 					<thead>

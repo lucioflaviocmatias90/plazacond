@@ -19,7 +19,7 @@
         @method('PUT')
         <div class="box-body">
             <div class="col-md-3">
-                <img class="profile-user-img img-responsive img-circle" src="{{ $resident->photo_path == '' ? '/img/profile.png' : '/storage/'.$resident->photo_path }}" alt="User profile picture">
+                <img class="profile-user-img img-responsive img-circle" src="{{ $resident->photo_path == '' ? '/img/profile.png' : str_replace(['["', '"]', '\\'], ['', '', ''], $resident->photo_path) }}" alt="User profile picture">
 
                 <p class="text-muted text-center">Residente - {{ $resident->owner->blap }}</p>
 

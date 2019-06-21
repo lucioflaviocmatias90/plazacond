@@ -15,10 +15,11 @@ class CreateVisitsTable extends Migration
     {
         Schema::create('visits', function (Blueprint $table) {
 
+            $table->increments('id');
             // PIVOT
             $table->date('entry_date')->nullable();
-            $table->date('departure_date')->nullable();
             $table->time('entry_hour')->nullable();
+            $table->date('departure_date')->nullable();
             $table->time('departure_hour')->nullable();
             $table->text('observation')->nullable();
 
@@ -29,7 +30,6 @@ class CreateVisitsTable extends Migration
             $table->foreign('visitor_id')->references('id')->on('visitors')->onDelete('cascade');
 
             // $table->primary(['owner_id', 'visitor_id']);
-            $table->increments('id');
 
             $table->timestamps();
         });

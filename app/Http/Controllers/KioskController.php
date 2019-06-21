@@ -34,7 +34,7 @@ class KioskController extends Controller
     public function store(Request $request)
     {
         Kiosk::create($request->all());
-        return back();
+        return back()->with('success', 'Evento cadastrado com sucesso!');
     }
 
     /**
@@ -59,7 +59,7 @@ class KioskController extends Controller
     public function update(Request $request, $id)
     {
         Kiosk::findOrFail($id)->update($request->all());
-        return redirect()->route('kiosk.index');
+        return redirect()->route('kiosk.index')->with('updated', 'Evento atualizado com sucesso!');
     }
 
     /**
@@ -70,6 +70,6 @@ class KioskController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //->with('deleted', 'Evento excluído com sucesso!')
     }
 }

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Repositories\ApartmentRepository;
 use App\Visit;
+use App\Visitor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class VisitController extends Controller
 {
@@ -33,7 +35,8 @@ class VisitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Visit::create($request->all());
+        return redirect()->route('visitor.index');
     }
 
     /**
