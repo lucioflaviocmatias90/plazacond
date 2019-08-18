@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,8 +10,19 @@ class Visitor extends Model
 	use SoftDeletes;
 
 	protected $table = 'visitors';
-	protected $fillable = ['fullname', 'rg', 'cpf', 'phone', 'photo_path', 'gender'];
-	protected $dates = ['deleted_at'];
+
+	protected $fillable = [
+	    'fullname',
+        'rg',
+        'cpf',
+        'phone',
+        'photo_path',
+        'gender'
+    ];
+
+	protected $dates = [
+	    'deleted_at'
+    ];
 	
     public function owner()
     {

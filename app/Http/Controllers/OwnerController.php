@@ -2,59 +2,63 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ConditionApartment;
+use App\Models\ResidentType;
 use App\Services\ImageService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Owner;
-use App\Apartment;
-use App\Repositories\ApartmentRepository;
+use App\Models\Owner;
+use App\Models\Apartment;
 use App\Http\Requests\OwnerRequest;
-use App\Enums\ResidentType;
 
 class OwnerController extends Controller
 {
+    private $owner;
     private $service;
 
-    public function __construct()
+    public function __construct(Owner $owner)
     {
-        $this->service = new ImageService(['photo_path'], 'owners');
+        $this->owner = $owner;
+        $this->service = new ImageService('photo_path', 'owners');
     }
 
     public function index()
     {
-        $owners = Owner::with('apartment')->orderBy('apartment_id', 'asc')->paginate(10);
+        $owners = $this->owner->with('apartment.condition')->orderBy('apartment_id', 'asc')->paginate(10);
+
         return view('owners.index', compact('owners'));
     }
 
-    public function indexJson()
+    public function create()
     {
-        return Apartment::all();
-    }
+        $owners = Apartment::all();
+        $conditions = ConditionApartment::all();
 
-    public function create(ApartmentRepository $repo)
-    {
-        return view('owners.create', ['owners'=>$repo->getAllApartmentNotRegistered()]);
+        return view('owners.create', [ 'owners' => $owners, 'conditions' => $conditions ]);
     }
 
     public function edit($id)
     {
-        $owner = Owner::with('apartment')->findOrFail($id);
-        return view('owners.edit', compact('owner'));
+        $owner = $this->owner->with('apartment.condition')->findOrFail($id);
+        $conditions = ConditionApartment::all();
+
+        return view('owners.edit', ['owner' => $owner, 'conditions' => $conditions]);
     }
 
-    public function store(Request $request)
+    public function store(OwnerRequest $request)
     {
-        $owner = Owner::create($request->except(['photo_path', 'condition']));
-        $owner->apartment->update(['condition'=>$request->condition]);
-        $this->service->uploadImage($request, $owner);
+        $owner = $this->owner->create($request->except('photo_path'));
+        $owner->apartment->update(['condition_id' => $request->condition_id]);
+
         return redirect()->route('owner.index')->with('success', 'Morador cadastrado com sucesso!');
     }
 
     public function show($id)
     { 
          $apart = Apartment::with('owner')->findOrFail($id);
-         $residentType = ResidentType::toSelectArray();
+         $residentType = ResidentType::all();
          $owner = Owner::withCount(['resident','vehicle', 'letter', 'classified', 'kiosk', 'notice', 'visitor'])->findOrFail($id);
+
          return view('owners.show', ['owner' => $owner, 'apart' => $apart, 'residentType' => $residentType]);
     }
 
@@ -72,11 +76,12 @@ class OwnerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        $owner = Owner::with('apartment')->findOrFail($id);
-        $owner->update($request->except(['photo_path', 'condition']));
-        $owner->apartment->update(['condition'=>$request->condition]);
-        return redirect()->route('owner.show', ['owner'=>$owner->id])->with('updated', 'Morador atualizado com sucesso!');
+    {;
+        $owner = $this->owner->findOrFail($id);
+        $owner->update($request->except('photo_path'));
+        $owner->apartment->update(['condition_id' => $request->condition_id]);
+
+        return redirect()->route('owner.show', ['owner'=>$this->owner->id])->with('updated', 'Morador atualizado com sucesso!');
     }        
 
     /**

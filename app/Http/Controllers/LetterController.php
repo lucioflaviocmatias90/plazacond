@@ -2,13 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Apartment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Letter;
-use App\Repositories\ApartmentRepository;
+use App\Models\Letter;
 
 class LetterController extends Controller
 {
+    private $letter;
+
+    /**
+     * LetterController constructor.
+     * @param $letter
+     */
+    public function __construct(Letter $letter)
+    {
+        $this->letter = $letter;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,13 +28,13 @@ class LetterController extends Controller
 
     public function index()
     {
-        $letters = Letter::with('owner')->paginate(10);
+        $letters = $this->letter->with('owner')->paginate(10);
         return view('letters.index',compact('letters'));
     }
 
-    public function create(ApartmentRepository $repo)
+    public function create()
     {
-        return view('letters.create', ['owners'=>$repo->getAll()]);
+        return view('letters.create', ['owners' => Apartment::all() ]);
     }
 
     /**
@@ -34,7 +45,7 @@ class LetterController extends Controller
      */
     public function store(Request $request)
     {
-        Letter::create($request->all());
+        $this->letter->create($request->all());
         return redirect()->route('owner.show', [$request->owner_id])->with('success', 'Correspondência cadastrado com sucesso!');
     }
 
@@ -49,10 +60,10 @@ class LetterController extends Controller
         //
     }
 
-    public function edit(ApartmentRepository $repo, $id)
+    public function edit($id)
     {
-        $letter = Letter::findOrFail($id);
-        return view('letters.edit', ['letter'=>$letter, 'owners'=>$repo->getAll()]);
+        $letter = $this->letter->findOrFail($id);
+        return view('letters.edit', ['letter' => $letter, 'owners' => Apartment::all() ]);
     }
 
     /**

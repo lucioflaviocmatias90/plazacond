@@ -30,7 +30,7 @@
                 <div class="row">
                     <div class="form-group col-md-10">
                         <label for="fullname">Nome Completo</label>
-                        <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Digite o seu nome completo sem abreviar" required="" autofocus="">
+                        <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Digite o seu nome completo sem abreviar" autofocus="">
                     </div>
 
                     <div class="form-group col-md-2">
@@ -69,17 +69,15 @@
 
                     <div class="form-group col-md-3">
                         <label for="phone">Telefone</label>
-                        <input type="text" class="form-control" id="phone" name="phone" placeholder="(xx) xxxxx-xxxx" required="">
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="(xx) xxxxx-xxxx">
                     </div>
 
                     <div class="form-group col-md-3">
-                        <label for="condition">Condição</label>
-                        <select class="form-control" id="condition" name="condition">
-                            <option value="alugado">alugado</option>
-                            <option value="residindo">residindo</option>
-                            <option value="aluga-se">aluga-se</option>
-                            <option value="vende-se">vende-se</option>
-                            <option value="vazio">vazio</option>
+                        <label for="condition_id">Condição</label>
+                        <select class="form-control" id="condition" name="condition_id">
+                            @foreach($conditions as $condition)
+                                <option value="{{ $condition->id }}">{{ $condition->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>              

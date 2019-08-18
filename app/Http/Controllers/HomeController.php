@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Letter;
-use App\Notice;
-use App\Owner;
-use App\Resident;
-use App\Vehicle;
-use App\Classified;
-use App\Apartment;
+use App\Models\Letter;
+use App\Models\Notice;
+use App\Models\Resident;
+use App\Models\Vehicle;
+use App\Models\Classified;
+use App\Models\Apartment;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -43,7 +42,7 @@ class HomeController extends Controller
 
     public function residentsCount()
     {
-        $owners = Apartment::where('condition', '=', 'residindo')->count();
+        $owners = Apartment::where('condition_id', 3)->count();
         $residents = Resident::all()->count();
         return $owners + $residents;
     }

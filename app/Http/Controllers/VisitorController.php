@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Repositories\ApartmentRepository;
 use App\Services\ImageService;
-use App\Visitor;
-use App\Apartment;
+use App\Models\Visitor;
+use App\Models\Apartment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

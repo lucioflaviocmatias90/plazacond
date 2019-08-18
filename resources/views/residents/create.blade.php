@@ -36,8 +36,8 @@
                     <div class="form-group col-md-3">
                         <label for="resident_type">Tipo Morador</label>
                         <select class="form-control" name="resident_type">
-                            @foreach($residenType as $key => $value)
-                            <option value="{{ $value }}">{{ $key }}</option>
+                            @foreach($residenType as $resiType)
+                            <option value="{{ $resiType->id }}">{{ $resiType->name }}</option>
                             @endforeach
                         </select>
                     </div>                      

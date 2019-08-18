@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Kiosk;
-use App\Apartment;
+use App\Models\Kiosk;
+use App\Models\Apartment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\ApartmentRepository;
@@ -18,11 +18,6 @@ class KioskController extends Controller
     public function index(ApartmentRepository $repo)
     {
         return view('kiosks.index', ['owners'=>$repo->getAll()]);
-    }
-
-    public function indexJson()
-    {
-        return Kiosk::with('owner.apartment')->get();
     }
 
     /**

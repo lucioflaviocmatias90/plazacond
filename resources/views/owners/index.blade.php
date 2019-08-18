@@ -67,26 +67,26 @@
                                         <a href="{{ route('owner.show', ['owner'=>$ow->id]) }}">{{ $ow->fullname }}</a>
                                     </td>
                                     <td>
-                                        @switch($ow->apartment->condition)
+                                        @switch($ow->apartment->condition->id)
 
-                                            @case('vazio')
-                                            <span class="label label-default">{{ $ow->apartment->condition }}</span>
+                                            @case('1')
+                                            <span class="label label-default">{{ $ow->apartment->condition->name }}</span>
                                             @break;
 
-                                            @case('alugado')
-                                            <span class="label label-primary">{{ $ow->apartment->condition }}</span>
+                                            @case('2')
+                                            <span class="label label-primary">{{ $ow->apartment->condition->name }}</span>
                                             @break;
 
-                                            @case('residindo')
-                                            <span class="label label-success">{{ $ow->apartment->condition }}</span>
+                                            @case('3')
+                                            <span class="label label-success">{{ $ow->apartment->condition->name }}</span>
                                             @break;
 
-                                            @case('vende-se')
-                                            <span class="label label-danger">{{ $ow->apartment->condition }}</span>
+                                            @case('4')
+                                            <span class="label label-danger">{{ $ow->apartment->condition->name }}</span>
                                             @break;
 
-                                            @case('aluga-se')
-                                            <span class="label label-warning">{{ $ow->apartment->condition }}</span>
+                                            @case('5')
+                                            <span class="label label-warning">{{ $ow->apartment->condition->name }}</span>
                                             @break;
 
                                         @endswitch

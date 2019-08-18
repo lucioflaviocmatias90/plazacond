@@ -25,9 +25,15 @@ class OwnerRequest extends FormRequest
     {
         return [
             'fullname' => 'required',
+            'birthday' => 'required',
             'email' => 'required|email|unique:owners',
+            'rg' => 'required',
+            'cpf' => 'required',
+            'gender' => 'required',
             'phone' => 'required',
-            'photo_path' => 'image'
+            'photo_path' => 'nullable|image',
+            'observation' => 'required',
+            'apartment_id' => 'required',
         ];
     }
 

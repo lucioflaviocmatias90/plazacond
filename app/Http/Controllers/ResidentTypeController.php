@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\ApartmentRepository;
-use App\Models\Visit;
-use App\Models\Visitor;
+use App\Models\ResidentType;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-class VisitController extends Controller
+class ResidentTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,10 +17,14 @@ class VisitController extends Controller
         //
     }
 
-    public function edit(ApartmentRepository $repo, $id)
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
-        $visit = Visit::findOrFail($id);
-        return view('visits.edit', ['owners'=>$repo->getAll(), 'visit'=>$visit]);
+        //
     }
 
     /**
@@ -34,17 +35,27 @@ class VisitController extends Controller
      */
     public function store(Request $request)
     {
-        Visit::create($request->all());
-        return redirect()->route('visitor.index');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\ResidentType  $residentType
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(ResidentType $residentType)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\ResidentType  $residentType
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(ResidentType $residentType)
     {
         //
     }
@@ -53,25 +64,22 @@ class VisitController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\ResidentType  $residentType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, ResidentType $residentType)
     {
-        $res = Visit::findOrFail($id);
-        $res->update($request->all());
-        return redirect()->route('visitor.show', ['visitor'=>$res->visitor_id]);
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\ResidentType  $residentType
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(ResidentType $residentType)
     {
-        Visit::findOrFail($id)->delete();
-        return back();
+        //
     }
 }

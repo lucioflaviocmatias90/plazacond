@@ -2,35 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Apartment;
+use App\Models\ResidentType;
 use App\Services\ImageService;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Resident;
-use App\Enums\ResidentType;
+use App\Models\Resident;
 use Illuminate\Support\Facades\Storage;
 use App\Repositories\ApartmentRepository;
 
 class ResidentController extends Controller
 {
+    private $resident;
     private $service;
 
-    public function __construct()
+    public function __construct(Resident $resident)
     {
+        $this->resident = $resident;
         $this->service = new ImageService(['photo_path'], 'residents');
     }
 
     public function index()
     {
-        $residents = Resident::with('owner.apartment')->paginate(10);
+        $residents = $this->resident->with('owner.apartment')->paginate(10);
+
         return view('residents.index', compact('residents'));
     }
 
-    public function create(ApartmentRepository $repo)
+    public function create()
     {
-        return view('residents.create', [
-            'residenType' => ResidentType::toSelectArray(),
-            'owners' => $repo->getAll(),
-        ]);
+        $owners = Apartment::all();
+        $residentTypes = ResidentType::all();
+
+        return view('residents.create', [ 'residenType' => $residentTypes, 'owners' => $owners ]);
     }
 
     public function edit(ApartmentRepository $repo, $id)

@@ -41,12 +41,10 @@
 
                     <div class="form-group col-md-3">
                         <label for="condition">Condição</label>
-                        <select class="form-control" id="condition" name="condition">
-                            <option value="alugado" {{ $owner->apartment->condition == 'alugado' ? 'selected' : ''}}>alugado</option>
-                            <option value="residindo" {{ $owner->apartment->condition == 'residindo' ? 'selected' : ''}}>residindo</option>
-                            <option value="aluga-se" {{ $owner->apartment->condition == 'aluga-se' ? 'selected' : ''}}>aluga-se</option>
-                            <option value="vende-se" {{ $owner->apartment->condition == 'vende-se' ? 'selected' : ''}}>vende-se</option>
-                            <option value="vazio" {{ $owner->apartment->condition == 'vazio' ? 'selected' : ''}}>vazio</option>
+                        <select class="form-control" id="condition_id" name="condition_id">
+                            @foreach($conditions as $condition)
+                                <option value="{{ $condition->id }}" {{ $owner->apartment->condition->name == $condition->name ? 'selected' : ''}}>{{ $condition->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -134,7 +132,7 @@
         //Date picker
         $(function() {
             $("#birthday").datepicker({
-                dateFormat: 'yy-mm-dd',
+                dateFormat: 'dd/mm/yy',
                 dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
                 dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
                 dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],

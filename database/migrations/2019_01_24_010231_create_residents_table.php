@@ -22,9 +22,10 @@ class CreateResidentsTable extends Migration
             $table->enum('gender', ['masculino', 'feminino']);
             $table->date('birthday')->nullable();
             $table->string('phone')->nullable();
-            $table->string('resident_type');
             $table->integer('owner_id')->unsigned()->nullable();
+            $table->integer('resident_type_id')->unsigned()->nullable();
             $table->foreign('owner_id')->references('id')->on('owners')->onDelete('cascade');
+            $table->foreign('resident_type_id')->references('id')->on('resident_types')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });

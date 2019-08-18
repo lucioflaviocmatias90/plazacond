@@ -51,31 +51,31 @@
                         <div class="col-md-6">
                             <strong><i class="fa fa-check-square-o margin-r-5"></i> Status</strong>
 
-                            @switch($owner->apartment->condition)
+                            @switch($owner->apartment->condition->name)
 
                                 @case('vazio')
                                 <p class="text-muted"><span
-                                            class="label label-default">{{ $owner->apartment->condition }}</span></p>
+                                            class="label label-default">{{ $owner->apartment->condition->name }}</span></p>
                                 @break
 
                                 @case('alugado')
                                 <p class="text-muted"><span
-                                            class="label label-primary">{{ $owner->apartment->condition }}</span></p>
+                                            class="label label-primary">{{ $owner->apartment->condition->name }}</span></p>
                                 @break
 
                                 @case('residindo')
                                 <p class="text-muted"><span
-                                            class="label label-success">{{ $owner->apartment->condition }}</span></p>
+                                            class="label label-success">{{ $owner->apartment->condition->name }}</span></p>
                                 @break
 
                                 @case('vende-se')
                                 <p class="text-muted"><span
-                                            class="label label-danger">{{ $owner->apartment->condition }}</span></p>
+                                            class="label label-danger">{{ $owner->apartment->condition->name }}</span></p>
                                 @break
 
                                 @case('aluga-se')
                                 <p class="text-muted"><span
-                                            class="label label-warning">{{ $owner->apartment->condition }}</span></p>
+                                            class="label label-warning">{{ $owner->apartment->condition->name }}</span></p>
                                 @break
 
                             @endswitch

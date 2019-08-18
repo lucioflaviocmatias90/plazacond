@@ -14,7 +14,8 @@
         "intervention/image": "^2.4",
         "jeroennoten/laravel-adminlte": "^1.25",
         "laravel/framework": "5.7.*",
-        "laravel/tinker": "^1.0"
+        "laravel/tinker": "^1.0",
+        "spatie/laravel-permission": "^2.37"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

@@ -2,35 +2,39 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Apartment;
 use App\Services\ImageService;
 use Illuminate\Http\Request;
-use App\Classified;
+use App\Models\Classified;
 use App\Repositories\ApartmentRepository;
 
 class ClassifiedController extends Controller
 {
+    private $classified;
     private $service;
 
-    public function __construct()
+    public function __construct(Classified $classified)
     {
+        $this->classified = $classified;
         $this->service = new ImageService(['photo_path'], 'classifieds');
     }
 
     public function index()
     {
-        $classifieds = Classified::with('owner')->paginate(12);
+        $classifieds = $this->classified->with('owner')->paginate(10);
         return view('classifieds.index', compact('classifieds'));
     }
 
     public function create(ApartmentRepository $repo)
     {
-        return view('classifieds.create', ['owners'=>$repo->getAll()]);
+        return view('classifieds.create', [ 'owners' => Apartment::all() ]);
     }
 
     public function store(Request $request)
     {
-        $classified = Classified::create($request->except('photo_path'));
-        $this->service->uploadImage($request, $classified);
+        $classified = $this->classified->create($request->except('photo_path'));
+//        $this->service->uploadImage($request, $classified);
+
         return redirect()->route('classified.index')->with('success', 'Classificado cadastrado com sucesso!');
     }
 

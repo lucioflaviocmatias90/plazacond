@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Phone;
+use App\Models\Phone;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

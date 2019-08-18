@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateApartmentsTable extends Migration
+class CreateConditionApartmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,10 @@ class CreateApartmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('apartments', function (Blueprint $table) {
+        Schema::create('condition_apartments', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('blap');
-            $table->unsignedInteger('condition_id');
+            $table->string('name');
             $table->timestamps();
-        });
-
-        Schema::table('apartments', function (Blueprint $table) {
-            $table->foreign('condition_id')->on('condition_apartments')->references('id');
         });
     }
 
@@ -32,6 +27,6 @@ class CreateApartmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('apartments');
+        Schema::dropIfExists('condition_apartments');
     }
 }

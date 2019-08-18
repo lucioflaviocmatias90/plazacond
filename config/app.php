@@ -178,7 +178,8 @@ return [
 
         /* modificações */
         JeroenNoten\LaravelAdminLte\ServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class
+        Intervention\Image\ImageServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
 
     ],
 

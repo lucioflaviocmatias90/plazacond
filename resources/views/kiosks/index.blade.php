@@ -93,7 +93,7 @@
         //Date picker
         $(function() {
             $("#date_marked").datepicker({
-                dateFormat: 'yy-mm-dd',
+                dateFormat: 'dd/mm/yy',
                 dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
                 dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
                 dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
@@ -104,7 +104,7 @@
             });
 
             $("#date_delivery").datepicker({
-                dateFormat: 'yy-mm-dd',
+                dateFormat: 'dd/mm/yy',
                 dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
                 dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
                 dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
@@ -115,6 +115,7 @@
             });
         });
     </script>
+
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src='/packages/core/main.js'></script>
     <script src='/packages/core/locales/pt-br.js'></script>
@@ -128,7 +129,12 @@
 
                 console.log(res);
 
-                return {title: `${res.owner.apartment.blap} - ${res.status}`, start: res.date_marked, end: res.date_delivery, url: `/kiosk/${res.id}`}
+                return {
+                    title: `${res.owner.apartment.blap} - ${res.status}`,
+                    start: res.date_marked,
+                    end: res.date_delivery,
+                    url: `/kiosk/${res.id}`
+                }
             });
 
             var calendarEl = document.getElementById('calendar');

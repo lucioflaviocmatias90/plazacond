@@ -5,10 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\ApartmentRepository;
-use App\Notice;
+use App\Models\Notice;
 
 class NoticeController extends Controller
 {
+    private $notice;
+
+    /**
+     * NoticeController constructor.
+     * @param $notice
+     */
+    public function __construct(Notice $notice)
+    {
+        $this->notice = $notice;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +27,7 @@ class NoticeController extends Controller
      */
     public function index()
     {
-        return view('notices.index', ['notices'=>Notice::with('owner')->paginate(10)]);
+        return view('notices.index', [ 'notices' => $this->notice->with('owner')->paginate(10) ]);
     }
 
     public function create(ApartmentRepository $repo)
@@ -32,7 +43,7 @@ class NoticeController extends Controller
      */
     public function store(Request $request)
     {
-        Notice::create($request->all());
+        $this->notice->create($request->all());
         return redirect()->route('notice.index')->with('success', 'Comunicado cadastrado com sucesso!');
     }
 
@@ -67,7 +78,7 @@ class NoticeController extends Controller
      */
     public function destroy($id)
     {
-        Notice::findOrFail($id)->delete();
+        $this->notice->findOrFail($id)->delete();
         return back()->with('deleted', 'Comunicado excluído com sucesso!');
     }
 }
