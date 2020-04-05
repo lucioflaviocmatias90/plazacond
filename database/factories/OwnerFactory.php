@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Owner::class, function (Faker $faker) {
+$factory->define(App\Models\Owner::class, function (Faker $faker) {
 
 	$condition = array('residindo', 'alugado', 'vende-se', 'aluga-se', 'vazio');
 

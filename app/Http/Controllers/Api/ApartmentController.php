@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Apartment;
+use App\Models\Apartment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

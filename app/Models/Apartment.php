@@ -6,11 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Apartment extends Model
 {
-	protected $fillable = ['blap', 'condition_id'];
+	protected $fillable = [
+	    'blap',
+        'condition_id'
+    ];
 	
     public function owner()
     {
-    	return $this->hasOne(Owner::class);
+    	return $this->hasMany(Owner::class);
     }
 
     public function condition()

@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\ConditionApartment;
 use App\Models\ResidentType;
+use App\Repositories\OwnerRepository;
 use App\Services\ImageService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Owner;
 use App\Models\Apartment;
 use App\Http\Requests\OwnerRequest;
 
@@ -16,7 +16,7 @@ class OwnerController extends Controller
     private $owner;
     private $service;
 
-    public function __construct(Owner $owner)
+    public function __construct(OwnerRepository $owner)
     {
         $this->owner = $owner;
         $this->service = new ImageService('photo_path', 'owners');
