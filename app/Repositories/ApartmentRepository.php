@@ -1,8 +1,8 @@
-<?php 
+<?php
 
 namespace App\Repositories;
 
-use App\Apartment;
+use App\Models\Apartment;
 use Illuminate\Support\Facades\DB;
 
 class ApartmentRepository
@@ -22,7 +22,9 @@ class ApartmentRepository
 
     public function getAllApartmentNotRegistered()
     {
-        return Apartment::where('condition', 'vazio')->where('updated_at', null)->get(['id', 'blap']);
+        return Apartment::where('condition', 'vazio')
+            ->where('updated_at', null)
+            ->get(['id', 'blap']);
     }
 }
 

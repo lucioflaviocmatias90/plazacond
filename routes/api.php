@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Kiosk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +17,3 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::get('kiosk', function () {
-    return Kiosk::with('owner.apartment')->get();
-});
-
-Route::get('owner', 'OwnerController@indexJson');

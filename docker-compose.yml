@@ -1,0 +1,24 @@
+version: '3'
+services:
+
+  #MySQL Service
+  db:
+    image: mysql:5.7
+    container_name: plazacond_mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=docker
+      - MYSQL_DATABASE=plazacond
+      - MYSQL_USER=docker
+      - MYSQL_PASSWORD=docker
+  db_testing:
+    image: mysql:5.7
+    container_name: plazacond_mysql_testing
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=docker
+      - MYSQL_DATABASE=plazacond_testing
+      - MYSQL_USER=docker
+      - MYSQL_PASSWORD=docker
