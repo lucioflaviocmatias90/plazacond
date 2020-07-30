@@ -2,13 +2,28 @@
 
 namespace App\Models;
 
+use App\Traits\Uuid;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Owner extends Model
 {
-    use SoftDeletes;
+    use Uuid, SoftDeletes;
+
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
+     * The "type" of the auto-incrementing ID.
+     *
+     * @var string
+     */
+    protected $keyType = 'string';
 
     protected $fillable = [
         'fullname',
@@ -60,7 +75,7 @@ class Owner extends Model
     {
         return $this->belongsTo(Apartment::class, 'apartment_id');
     }
-    
+
     public function resident()
     {
     	return $this->hasMany('App\Models\Resident');

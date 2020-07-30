@@ -2,10 +2,28 @@
 
 namespace App\Models;
 
+use App\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ResidentType extends Model
 {
+    use Uuid, SoftDeletes;
+
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
+     * The "type" of the auto-incrementing ID.
+     *
+     * @var string
+     */
+    protected $keyType = 'string';
+
     const OWNER = 1;                // 'Responsável';
     const COMPANION = 2;            // 'Companheiro(a)';
     const SON = 3;                  // 'Filho(a)';

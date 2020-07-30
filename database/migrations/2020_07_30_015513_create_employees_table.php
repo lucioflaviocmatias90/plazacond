@@ -18,6 +18,7 @@ class CreateEmployeesTable extends Migration
             $table->string('fullname');
             $table->string('rg');
             $table->string('cpf');
+            $table->string('occupation');
             $table->timestamps();
             $table->softDeletes();
         });

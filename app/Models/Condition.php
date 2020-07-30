@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 
-class Employee extends Model
+class Condition extends Model
 {
     use Uuid;
 
