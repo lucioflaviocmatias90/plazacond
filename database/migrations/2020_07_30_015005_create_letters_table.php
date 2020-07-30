@@ -14,11 +14,11 @@ class CreateLettersTable extends Migration
     public function up()
     {
         Schema::create('letters', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('title');
             $table->string('status');
             $table->text('observation')->nullable();
-            $table->unsignedBigInteger('owner_id')->nullable();
+            $table->uuid('owner_id')->nullable();
             $table->foreign('owner_id')->references('id')->on('owners')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();

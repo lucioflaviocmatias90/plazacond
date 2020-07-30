@@ -14,7 +14,7 @@ class CreateKiosksTable extends Migration
     public function up()
     {
         Schema::create('kiosks', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->timestamps();
         });
     }

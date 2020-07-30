@@ -14,7 +14,7 @@ class CreateOwnersTable extends Migration
     public function up()
     {
         Schema::create('owners', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('fullname');
             $table->date('birthday')->nullable();
             $table->string('email')->nullable();
@@ -24,7 +24,7 @@ class CreateOwnersTable extends Migration
             $table->string('phone');
             $table->string('photo_path')->nullable();
             $table->text('observation')->nullable();
-            $table->unsignedBigInteger('apartment_id')->nullable();
+            $table->uuid('apartment_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

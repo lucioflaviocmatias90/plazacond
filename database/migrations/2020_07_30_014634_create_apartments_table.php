@@ -14,7 +14,7 @@ class CreateApartmentsTable extends Migration
     public function up()
     {
         Schema::create('apartments', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('blap');
             $table->enum('condition', ['alugado', 'residindo', 'aluga-se', 'vende-se', 'vazio']);
             $table->timestamps();

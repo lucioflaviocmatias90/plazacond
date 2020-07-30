@@ -14,12 +14,12 @@ class CreateClassifiedsTable extends Migration
     public function up()
     {
         Schema::create('classifieds', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('title');
             $table->string('price')->nullable();
             $table->text('description');
             $table->string('photo_path')->nullable();
-            $table->unsignedBigInteger('owner_id')->nullable();
+            $table->uuid('owner_id')->nullable();
             $table->foreign('owner_id')->references('id')->on('owners')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
