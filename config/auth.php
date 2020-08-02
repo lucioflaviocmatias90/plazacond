@@ -46,6 +46,24 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'master' => [
+            'driver' => 'token',
+            'provider' => 'masters',
+            'hash' => false,
+        ],
+
+        'admin' => [
+            'driver' => 'token',
+            'provider' => 'admins',
+            'hash' => false,
+        ],
+
+        'resident' => [
+            'driver' => 'token',
+            'provider' => 'residents',
+            'hash' => false,
+        ],
     ],
 
     /*
@@ -66,6 +84,21 @@ return [
     */
 
     'providers' => [
+        'masters' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Master::class,
+        ],
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
+
+        'residents' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Resident::class,
+        ],
+
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,

@@ -15,7 +15,6 @@ class ApartmentController extends Controller
         $this->apartment = $apartment;
     }
 
-
     public function index()
     {
         return $this->apartment->all();
