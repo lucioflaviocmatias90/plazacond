@@ -2,7 +2,9 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Ramsey\Uuid\Uuid;
 
 class CreateAdminsTable extends Migration
 {
@@ -21,6 +23,15 @@ class CreateAdminsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+
+        DB::table('admins')->insert([
+            'id' => Uuid::uuid4(),
+            'name' => 'Adm Sistema',
+            'email' => 'admin@plazacond.com',
+            'password' => bcrypt('123123'),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 
     /**
