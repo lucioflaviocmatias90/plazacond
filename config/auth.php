@@ -48,21 +48,18 @@ return [
         ],
 
         'master' => [
-            'driver' => 'token',
+            'driver' => 'jwt',
             'provider' => 'masters',
-            'hash' => false,
         ],
 
         'admin' => [
-            'driver' => 'token',
+            'driver' => 'jwt',
             'provider' => 'admins',
-            'hash' => false,
         ],
 
         'resident' => [
-            'driver' => 'token',
+            'driver' => 'jwt',
             'provider' => 'residents',
-            'hash' => false,
         ],
     ],
 
