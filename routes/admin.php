@@ -2,6 +2,4 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function() {
-    return 'ola';
-});
+Route::post('login', 'LoginController@store');
