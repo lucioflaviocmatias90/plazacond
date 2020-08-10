@@ -22,11 +22,18 @@ class CreateResidentsTable extends Migration
             $table->enum('gender', ['masculino', 'feminino']);
             $table->date('birthday')->nullable();
             $table->string('phone')->nullable();
-            $table->string('resident_type');
-            $table->uuid('owner_id')->nullable();
-            $table->foreign('owner_id')->references('id')->on('owners')->onDelete('cascade');
+            $table->uuid('resident_type_id');
+            $table->uuid('owner_id');
+
             $table->timestamps();
             $table->softDeletes();
+        });
+
+        Schema::table('residents', function (Blueprint $table) {
+            $table->foreign('resident_type_id')
+                ->references('id')
+                ->on('resident_types');
+            $table->foreign('owner_id')->references('id')->on('owners');
         });
     }
 

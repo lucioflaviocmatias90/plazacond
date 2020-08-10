@@ -24,7 +24,13 @@ class Classified extends Model
      */
     protected $keyType = 'string';
 
-	protected $fillable = ['title', 'price', 'description', 'photo_path', 'owner_id'];
+	protected $fillable = [
+        'title',
+        'price',
+        'description',
+        'photo_path',
+        'owner_id'
+    ];
 
 	protected $dates = ['deleted_at'];
 

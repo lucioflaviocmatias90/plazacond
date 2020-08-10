@@ -3,29 +3,38 @@
 namespace App\Repositories;
 
 use App\Models\Apartment;
-use Illuminate\Support\Facades\DB;
 
 class ApartmentRepository
 {
-	public function getAll()
-	{
-		return DB::table('owners')
-            ->join('apartments', 'owners.apartment_id', '=', 'apartments.id')
-            ->select('owners.id', 'apartments.blap')
-            ->get();
-	}
+    private $apartment;
 
-	public function getAllApartment()
-	{
-		return Apartment::all(['id', 'blap']);
-	}
-
-    public function getAllApartmentNotRegistered()
+    /**
+     * ApartmentRepository Constructor
+     *
+     * @return void
+     */
+    public function __construct(Apartment $apartment)
     {
-        return Apartment::where('condition', 'vazio')
-            ->where('updated_at', null)
-            ->get(['id', 'blap']);
+        $this->apartment = $apartment;
     }
+
+	public function getAll(array $data = [])
+	{
+        $condition = $data['condition'] ?? null;
+        $blap = $data['blap'] ?? null;
+
+        $query = $this->apartment->with('condition');
+
+        if ($condition) {
+            $query->where('condition_id', $condition);
+        }
+
+        if ($blap) {
+            $query->where('blap', 'like', '%'.$blap.'%');
+        }
+
+        return $query->orderBy('blap', 'asc')->paginate();
+	}
 }
 
 ?>

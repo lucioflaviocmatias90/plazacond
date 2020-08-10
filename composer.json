@@ -59,6 +59,9 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "test": [
+            "vendor/bin/phpunit --colors=always --verbose --configuration phpunit.xml --testdox tests/Feature"
         ]
     }
 }

@@ -16,10 +16,13 @@ class CreateApartmentsTable extends Migration
         Schema::create('apartments', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('blap');
-            $table->uuid('condition_id')->nullable();
-            $table->foreign('condition_id')->references('id')->on('conditions');
+            $table->uuid('condition_id');
             $table->timestamps();
             $table->softDeletes();
+        });
+
+        Schema::table('apartments', function (Blueprint $table) {
+            $table->foreign('condition_id')->references('id')->on('conditions');
         });
     }
 

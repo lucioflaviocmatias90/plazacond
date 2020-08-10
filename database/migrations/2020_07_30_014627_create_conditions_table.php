@@ -39,6 +39,10 @@ class CreateConditionsTable extends Migration
                 'id' => 'd0ebc43d-a13c-4f0c-ae23-841adad74e1b',
                 'name' => 'aluga-se'
             ],
+            [
+                'id' => 'ad33c8ff-fcba-446d-be90-8f72a7275e2c',
+                'name' => 'sem proprietário'
+            ],
         ]);
     }
 

@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
 
-class Apartment extends Model
+class ApartmentOwner extends Model
 {
     use Uuid;
 
@@ -23,18 +23,21 @@ class Apartment extends Model
      */
     protected $keyType = 'string';
 
-	protected $fillable = [
-	    'blap',
-        'condition_id'
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'apartment_owner';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'apartment_id',
+        'owner_id',
+        'is_current',
     ];
-
-    public function owner()
-    {
-    	return $this->hasMany(Owner::class);
-    }
-
-    public function condition()
-    {
-        return $this->belongsTo(Condition::class, 'condition_id');
-    }
 }

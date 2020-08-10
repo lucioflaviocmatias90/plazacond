@@ -1,22 +1,29 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Apartment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ApartmentResource;
+use App\Repositories\ApartmentRepository;
 
 class ApartmentController extends Controller
 {
-    private $apartment;
+    private $apartmentRepository;
 
-    public function __construct(Apartment $apartment)
+    public function __construct(ApartmentRepository $apartmentRepository)
     {
-        $this->apartment = $apartment;
+        $this->apartmentRepository = $apartmentRepository;
     }
 
-    public function index()
+    /**
+     * List all apartments registered with current condition
+     */
+    public function index(Request $request)
     {
-        return $this->apartment->all();
+        $apartments = $this->apartmentRepository
+            ->getAll($request->query());
+
+        return ApartmentResource::collection($apartments);
     }
 }
