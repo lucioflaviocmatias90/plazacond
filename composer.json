@@ -61,7 +61,7 @@
             "@php artisan key:generate --ansi"
         ],
         "test": [
-            "vendor/bin/phpunit --colors=always --verbose --configuration phpunit.xml --testdox tests/Feature --coverage-html ./tests/coverage"
+            "vendor/bin/phpunit --colors=always --verbose --configuration phpunit.xml --testdox tests"
         ]
     }
 }
