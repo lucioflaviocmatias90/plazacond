@@ -11,6 +11,9 @@ class PhoneController extends Controller
 {
     private $phoneRepository;
 
+    /**
+     * PhoneController constructor
+     */
     public function __construct(PhoneRepository $phoneRepository)
     {
         $this->phoneRepository = $phoneRepository;

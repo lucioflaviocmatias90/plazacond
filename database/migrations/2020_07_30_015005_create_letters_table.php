@@ -16,12 +16,18 @@ class CreateLettersTable extends Migration
         Schema::create('letters', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('title');
-            $table->string('status');
             $table->text('observation')->nullable();
-            $table->uuid('owner_id')->nullable();
-            $table->foreign('owner_id')->references('id')->on('owners')->onDelete('cascade');
+            $table->uuid('apartment_id')->nullable();
+            $table->uuid('status_letter_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
+        });
+
+        Schema::table('letters', function (Blueprint $table) {
+            $table->foreign('status_letter_id')
+                ->references('id')->on('status_letters');
+            $table->foreign('apartment_id')
+                ->references('id')->on('apartments');
         });
     }
 

@@ -28,15 +28,21 @@ class Letter extends Model
 	    'title',
         'status',
         'observation',
-        'owner_id'
+        'apartment_id',
+        'status_letter_id',
     ];
 
 	protected $dates = [
 	    'deleted_at'
     ];
 
-    public function owner()
+    public function apartment()
     {
-    	return $this->belongsTo('App\Owner');
+    	return $this->belongsTo(Apartment::class);
+    }
+
+    public function status()
+    {
+    	return $this->belongsTo(StatusLetter::class, 'status_letter_id');
     }
 }

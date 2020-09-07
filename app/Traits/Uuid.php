@@ -14,7 +14,7 @@ trait Uuid
         static::creating(function ($model) {
             try {
                 $model->id = (string) Str::uuid(); // generate uuid
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 abort(500, $e->getMessage());
             }
         });
