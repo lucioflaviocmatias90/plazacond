@@ -11,6 +11,7 @@ Route::group(['middleware' => ['auth:admin']], function () {
         'index', 'store', 'update', 'destroy'
     ]);
 
-    Route::get('phones', 'PhoneController@index');
+    Route::apiResource('notices', 'NoticeController');
 
+    Route::resource('phones', 'PhoneController')->only(['index', 'store']);
 });

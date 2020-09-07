@@ -34,8 +34,8 @@ class Notice extends Model
 	    'deleted_at'
     ];
 
-    public function owner()
+    public function apartment()
     {
-    	return $this->belongsTo('App\Owner');
+    	return $this->belongsTo(Apartment::class);
     }
 }

@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repositories\ApartmentRepository;
-use App\Models\Notice;
+use App\Http\Requests\NoticeRequest;
+use App\Http\Resources\NoticeResource;
+use App\Repositories\NoticeRepository;
 
 class NoticeController extends Controller
 {
-    private $notice;
+    private $noticeRepository;
 
     /**
-     * NoticeController constructor.
-     * @param $notice
+     * NoticeController constructor
      */
-    public function __construct(Notice $notice)
+    public function __construct(NoticeRepository $noticeRepository)
     {
-        $this->notice = $notice;
+        $this->noticeRepository = $noticeRepository;
     }
 
     /**
@@ -25,14 +25,11 @@ class NoticeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('notices.index', [ 'notices' => $this->notice->with('owner')->paginate(10) ]);
-    }
+        $notices = $this->noticeRepository->getAll($request->query());
 
-    public function create(ApartmentRepository $repo)
-    {
-        return view('notices.create', ['owners'=>$repo->getAll()]);
+        return NoticeResource::collection($notices);
     }
 
     /**
@@ -41,10 +38,11 @@ class NoticeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(NoticeRequest $request)
     {
-        $this->notice->create($request->all());
-        return redirect()->route('notice.index')->with('success', 'Comunicado cadastrado com sucesso!');
+        $data = $request->validated();
+
+        $this->noticeRepository->create($data);
     }
 
     /**
@@ -78,7 +76,6 @@ class NoticeController extends Controller
      */
     public function destroy($id)
     {
-        $this->notice->findOrFail($id)->delete();
-        return back()->with('deleted', 'Comunicado excluído com sucesso!');
+        //
     }
 }

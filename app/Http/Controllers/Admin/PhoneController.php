@@ -39,6 +39,8 @@ class PhoneController extends Controller
 
         $this->phoneRepository->create($data);
 
-        return response()->json(['message' => 'Número de contato registrado com sucesso']);
+        return response()->json([
+            'message' => 'Número de contato registrado com sucesso'
+        ]);
     }
 }

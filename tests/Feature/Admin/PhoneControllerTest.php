@@ -91,17 +91,16 @@ class PhoneControllerTest extends TestCase
     public function it_should_to_create_a_new_phone_numbers()
     {
         $admin = factory(Admin::class)->create();
+        $phone = factory(Phone::class)->create();
 
         $response = $this->actingAs($admin, 'admin')
-            ->postJson('/api/admin/phones');
+            ->postJson('/api/admin/phones', [
+                'name' => $phone->name,
+                'number' => $phone->number,
+            ]);
 
-        $response->assertStatus(200)->assertJsonStructure([
-            'data' => [
-                '*' => [
-                    'id', 'name', 'number', 'created_at', 'updated_at'
-                ]
-            ],
-            'links', 'meta'
+        $response->assertStatus(200)->assertExactJson([
+            'message' => 'Número de contato registrado com sucesso'
         ]);
     }
 }

@@ -17,10 +17,13 @@ class CreateNoticesTable extends Migration
             $table->uuid('id')->primary();
             $table->string('title');
             $table->text('description');
-            $table->uuid('owner_id')->nullable();
-            $table->foreign('owner_id')->references('id')->on('owners')->onDelete('cascade');
+            $table->uuid('apartment_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
+        });
+
+        Schema::table('notices', function (Blueprint $table) {
+            $table->foreign('apartment_id')->references('id')->on('apartments');
         });
     }
 
