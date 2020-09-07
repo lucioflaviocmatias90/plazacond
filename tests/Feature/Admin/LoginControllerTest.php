@@ -16,7 +16,7 @@ class LoginControllerTest extends TestCase
     {
         $response = $this->postJson('api/admin/login');
 
-        $response->assertUnauthorized();
+        $response->assertStatus(422);
     }
 
     /**
@@ -26,10 +26,10 @@ class LoginControllerTest extends TestCase
     {
         $response = $this->postJson('api/admin/login', [
             'email' => 'email@email.com',
-            'password' => 'qualquer-senha'
+            'password' => '12345678'
         ]);
 
-        $response->assertUnauthorized()->assertExactJson([
+        $response->assertStatus(401)->assertExactJson([
             'error' => 'Unauthorized'
         ]);
     }

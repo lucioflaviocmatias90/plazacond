@@ -35,4 +35,14 @@ class PhoneRepository
 
         return $query->orderBy('name', 'asc')->paginate();
     }
+
+    /**
+     * To store a new phone number
+     *
+     * @param array $data
+     */
+    public function create($data)
+    {
+        return $this->phone->create($data);
+    }
 }
