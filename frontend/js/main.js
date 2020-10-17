@@ -89,6 +89,30 @@ new Vue({
           status: 'PORTARIA'
         }
       ]
+    },
+    classifieds: {
+      list: [
+        {
+          name: 'Samsung TV',
+          price: 'R$ 1.800,00',
+          description: 'Samsung 32" 1080p 60Hz LED Smart HDTV.'
+        },
+        {
+          name: 'Bicicleta Mountain Bike',
+          price: 'R$ 700,00',
+          description: '26" Mongoose Dolomite Men\'s 7-speed, Navy Blue.'
+        },
+        {
+          name: 'Xbox One',
+          price: 'R$ 350,00',
+          description: 'Xbox One Console Bundle with Halo Master Chief Collection.'
+        },
+        {
+          name: 'PlayStation 4',
+          price: 'R$ 399,00',
+          description: 'PlayStation 4 500GB Console (PS4)'
+        }
+      ]
     }
   }
 })
