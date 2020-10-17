@@ -11,4 +11,5 @@
 ## frontend
 
 - cd ./frontend
+- yarn
 - yarn serve
