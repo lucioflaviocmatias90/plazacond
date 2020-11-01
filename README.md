@@ -1,5 +1,9 @@
 # Introdução
 
+## database
+
+- docker-compose up -d
+
 ## backend
 
 - cd ./backend
