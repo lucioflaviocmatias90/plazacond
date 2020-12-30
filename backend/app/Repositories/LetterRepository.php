@@ -45,7 +45,6 @@ class LetterRepository
     {
         $letter = $this->letter->findOrFail($id);
 
-        dd($letter);
         $letter->update($data);
 
         return true;
