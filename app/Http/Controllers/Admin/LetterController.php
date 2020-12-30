@@ -61,6 +61,7 @@ class LetterController extends Controller
     public function update(LetterRequest $request, $id)
     {
         $validated = $request->validated();
+
         $this->letterRepository->update($id, $validated);
 
         return response()->json([
