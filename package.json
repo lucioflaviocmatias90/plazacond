@@ -1,4 +1,5 @@
 {
+  "private": true,
   "name": "plazacond",
   "version": "1.0.0",
   "main": "index.js",
@@ -7,6 +8,6 @@
   "license": "MIT",
   "scripts": {
     "dev:server": "cd ./backend && php artisan serve --port=3333",
-    "migrations": "cd ./backend && php artisan migrate:fresh --seed"
+    "migrations": "docker-compose exec php-fpm php artisan migrate:fresh --seed"
   }
 }
