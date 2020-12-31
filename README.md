@@ -1,10 +1,11 @@
 # LARACONDOMINUM
 
-This is a project based management condominios
+This is a project based on managing entry and exit of visitors and residents to condominium ordinances
 
-## Commands principles
+## Commands to start the project
 
 - docker-compose up -d
+- yarn migrations
 
 ## Stop / remove all Docker containers
 

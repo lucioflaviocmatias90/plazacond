@@ -8,6 +8,7 @@
   "license": "MIT",
   "scripts": {
     "dev:server": "cd ./backend && php artisan serve --port=3333",
-    "migrations": "docker-compose exec php-fpm php artisan migrate:fresh --seed"
+    "migrations": "docker-compose exec php-fpm php artisan migrate:fresh --seed",
+    "test:server": "docker-compose exec php-fpm php artisan test"
   }
 }
