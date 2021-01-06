@@ -41,16 +41,14 @@ class LetterRepository
         return $this->letter->create($data);
     }
 
-    public function update(int $id, array $data)
+    public function update(string $id, array $data): void
     {
         $letter = $this->letter->findOrFail($id);
 
         $letter->update($data);
-
-        return true;
     }
 
-    public function delete(int $id)
+    public function delete(string $id)
     {
         $letter = $this->letter->findOrFail($id);
         $letter->delete();

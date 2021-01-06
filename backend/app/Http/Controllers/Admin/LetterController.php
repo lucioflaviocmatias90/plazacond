@@ -55,18 +55,28 @@ class LetterController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\LetterRequest  $request
-     * @param  int  $id
+     * @param  string  $id
      * @return \Illuminate\Http\Response
      */
     public function update(LetterRequest $request, $id)
     {
         $validated = $request->validated();
 
-        $this->letterRepository->update($id, $validated);
+        try {
+            $this->letterRepository->update($id, $validated);
 
-        return response()->json([
-            'message' => 'Correspondência atualizada com sucesso'
-        ], 201);
+            return response()->json([
+                'message' => 'Correspondência atualizada com sucesso'
+            ]);
+        } catch (\Exception $ex) {
+            return response()->json([
+                'error' => [
+                    'code' => '001',
+                    'message' => 'Error ao atualizar a correspondência',
+                    'err' => $ex->getMessage()
+                ]
+            ], 400);
+        }
     }
 
     /**
